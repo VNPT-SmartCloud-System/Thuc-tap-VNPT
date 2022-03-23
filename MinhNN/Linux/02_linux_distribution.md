@@ -1,12 +1,14 @@
 # Linux Distribution
 
-# 1. Khái niệm  Linux Distribution
+# 1. Khái niệm Linux Distribution
+
 ## 1.1 Giới thiệu về Linux Distribution
+
 - **Linux Distribution** là các bản phân phối của linux - là một **hệ điều hành**, chúng đều dựa trên 3 nhánh chính để phát triển, đó là **Debian, Red Hat, Slackware**. Chúng đều có **Linux và Kernel**
 
-    - > Kernel là một chương trình máy tính, có nhiệm vụ quản lý các tài nguyên hệ thống, được khởi chạy trong quá trình khởi động hệ thống (sau bootloader)
+  - > Kernel là một chương trình máy tính, có nhiệm vụ quản lý các tài nguyên hệ thống, được khởi chạy trong quá trình khởi động hệ thống (sau bootloader)
 
- - **Thành Phần**: Một bản distro thường bao gồm: một kernel Linux, các công cụ và thư viện GNU.
+- **Thành Phần**: Một bản distro thường bao gồm: một kernel Linux, các công cụ và thư viện GNU.
 
 ## 1.2 Loại hình và xu hướng phát triển
 
@@ -37,12 +39,11 @@ Vì thế nên sẽ chia ra các nhánh để phục vụ cho từng công việ
         -Gồm: Ubuntu, Open SUSE, Linux Mint
         -Đặc tính của chúng là phát triển trong thời gian ngắn, ứng dụng các công nghệ mới liên tục, nhóm này có GUI thân thiện với người dùng.
 
-
 # 2. Các nhánh distro phổ biến
 
 - Mặc dù có rất nhiều các distro, nhưng cơ bản đều dựa trên 3 nhánh chính đó là: **Debian, Red Hat, và Slackware**.
 - Do Linux nó là một open source nên có thể tùy biến theo ý của mình, miễn là dựa trên các license mà Linux đưa ra.
-- Sau một thời gian dài phát triển thì hiện nay, 2 nhánh distro phổ biến là **Debian và Fedora** 
+- Sau một thời gian dài phát triển thì hiện nay, 2 nhánh distro phổ biến là **Debian và Fedora**
 
 ## 2.1 Debian
 
@@ -52,16 +53,19 @@ Vì thế nên sẽ chia ra các nhánh để phục vụ cho từng công việ
 
 - Có 3 phiên bản khác nhau:
 
-    - Phiên bản ổn định mà người dùng được khuyến khích sử dụng.
-    - Phiên bản không ổn định.
-    - Phiên bản thử nghiệm cho những ai có mong muốn trải nghiệm phần mềm mới nhất.
+  - Phiên bản ổn định mà người dùng được khuyến khích sử dụng.
+  - Phiên bản không ổn định.
+  - Phiên bản thử nghiệm cho những ai có mong muốn trải nghiệm phần mềm mới nhất.
+
 - Hệ thống quản lý gói phần mềm sử dụng:
-    - `dpkg` cài đặt các gói phần mềm .deb
-    - `apt` cài đặt các phần mềm khác từ trên kho
+
+  - `dpkg` cài đặt các gói phần mềm .deb
+  - `apt` cài đặt các phần mềm khác từ trên kho
 
 - Có khả nhiều bản dựa trên distro Debian: Raspbian, Knoppix , Kali Linux và phổ biến nhất là **Ubuntu**
 
 ### 2.1.1 Ubuntu
+
 ![Ubuntu](02_linux_distribution_image/ubuntu.png)
 
 - Do công ty Canonical phân phối, chỉ mới xuất hiện vào quý 3/2004 và không lâu sau đó đã trở nên phố biến.
@@ -94,11 +98,9 @@ Vì thế nên sẽ chia ra các nhánh để phục vụ cho từng công việ
 
 - 2 distro phổ biến nhất được phát triển dựa trên Fedora là ** Red Hat Enterprise Linux ** - với đối tượng hướng tới là các doanh nghiệp và công ty lớn (có tính phí), và **CentOS** - free và hướng tới đối tượng là người sử dụng máy tính cá nhân.
 
-
-## Tổng quan lại:  Các distro của Linux được mô tả như hình sau:
+## Tổng quan lại: Các distro của Linux được mô tả như hình sau:
 
 ![Overview](02_linux_distribution_image/overview.png)
-
 
 # 3. Tài liệu tham khảo
 
@@ -109,3 +111,5 @@ Vì thế nên sẽ chia ra các nhánh để phục vụ cho từng công việ
 [3] Linux là gì? - [What is Linux?](https://vi.wikipedia.org/wiki/B%E1%BA%A3n_ph%C3%A2n_ph%E1%BB%91i_Linux)
 
 [4] Một số tài liệu về [Debian](https://vi.wikipedia.org/wiki/Debian), [Fedora](https://vi.wikipedia.org/wiki/Fedora), [Red Hat Enterprise Linux](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux), [CentOs](https://www.centos.org/about/)
+
+---
