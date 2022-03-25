@@ -111,5 +111,3 @@ Vì thế nên sẽ chia ra các nhánh để phục vụ cho từng công việ
 [3] Linux là gì? - [What is Linux?](https://vi.wikipedia.org/wiki/B%E1%BA%A3n_ph%C3%A2n_ph%E1%BB%91i_Linux)
 
 [4] Một số tài liệu về [Debian](https://vi.wikipedia.org/wiki/Debian), [Fedora](https://vi.wikipedia.org/wiki/Fedora), [Red Hat Enterprise Linux](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux), [CentOs](https://wwwcentos.org/about/)
-
----
