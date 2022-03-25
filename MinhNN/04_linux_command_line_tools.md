@@ -158,3 +158,5 @@ head cũng là lệnh đọc file, tuy nhiên sẽ đọc từ đầu file, và 
 tail là một dạng đọc file từ cuối lên đầu, nó thường được sử dụng để check log (vì log thường được viết vào cuối file)
 
 ---
+
+---
