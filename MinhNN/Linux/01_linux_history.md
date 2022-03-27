@@ -1,6 +1,6 @@
 # Linux History
 
->  Linux là một hệ điều hành mã nguồn mở và miễn phí. Bất cứ ai cũng có thể sao chép, tuyên truyền, phân tán, viết lại và phát triển hệ điều hành này. Vì vầy hệ điều hành Linux ngày nay càng ngày càng phát triển
+> Linux là một hệ điều hành mã nguồn mở và miễn phí. Bất cứ ai cũng có thể sao chép, tuyên truyền, phân tán, viết lại và phát triển hệ điều hành này. Vì vầy hệ điều hành Linux ngày nay càng ngày càng phát triển
 
 ---
 
@@ -20,7 +20,7 @@
 
 - Tháng 8/1991, Torvalds gửi đi thông điệp và nổi tiếng sau này về sự ra đời của Linux.
 
-![linuxImage](images/linux-image.png)
+![linuxImage](images/../02_linux_distribution_image/linux-image.png)
 
 - Tháng 9/1991, phiên bản Linux 0.01, phiên bản Linux đầu tiên được Torvalds công bố. Tháng 10/1991 phiên bản Linux 0.02 ra đời.
 
@@ -34,7 +34,7 @@
 
 - Năm 1996, Linus Torvalds ghé thăm công viên hải dương học. Ông đã quyết định sử dụng hình ảnh chú chim cánh cụt để làm biểu tượng chính thức của Linux.
 
-    - ![linuxLogo](images/linux-logo.png)
+  - ![linuxLogo](images/../02_linux_distribution_image/linux-logo.png)
 
 - Năm 1998, Linux bắt đầu được các tập đoàn công nghệ quan tâm và đầu tư để phát triển. Nổi bật là IBM đã đầu tư hàng tỉ USD để phát triển các dịch vụ và phần mềm trên nền tảng Linux. Ngoài IBM, còn có Compaq và Oracle cũng bắt đầu đầu tư và phát triển hê điều hành Linux.
 
@@ -45,6 +45,3 @@
 - Tính đến hiện tại, Linux đã có rất nhiều phiên bản khác nhau, được xây dựng và phát triển riêng biệt bởi các công ty phần mềm và các cá nhân. Nổi bật trong số đó chính là hệ điều hành di động Android của Google, hiện là một trong những hệ điều hành thông dụng nhất hiện nay.
 
 - Hiện nay, Linux được sử dụng rộng rãi trên toàn thế giới, trên các máy tính cá nhân, các máy chủ, đến các thiết bị di động, máy nghe nhạc, máy tính bảng, các máy ATM và thậm chí trên cả các siêu máy tính.
-
-
-
