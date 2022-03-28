@@ -201,7 +201,32 @@ mà không cần quan tâm nó có bao nhiêu kí tự ở phía trước địn
 
 ## 4. Cách sử dụng piping and redirection trong Linux
 
-### 4.1 Redirection
+### Luồng dữ liệu
+
+![data-stream-image](images/data-stream-image.png)
+
+- **stdin** (standard input) đây là luồng sẽ đưa dữ liệu vào chương trình để xử lý.
+- **stdout** (standard output) luồng này dùng để xuất dữ liệu ra màn hình hiển thị sau khi quá trình thực thi hoàn tất mà không gặp lỗi.
+- **stderr** (standard error) luồng này có chức năng tương tự **stdout**, tuy nhiên nó chỉ dùng để in các thông báo lỗi và đồng thời khi đó tín hiệu lỗi cũng được gửi tới hệ điều hành
+
+- Khi làm việc trên Linux command line. Chắc hẳn chúng ta đã từng sử dụng pipe và redirection. Chẳng hạn như để tìm và in dòng chứa từ "Hello World" từ file log.txt ra file result.txt: `cat log.txt | grep "Xin chào" > README.txt`. Tuy nhiên bạn không biết rằng là mình đã vừa sử dụng pipe ( | ) và redirection ( > ) trong linux
+
+### 4.1 Piping
+
+- Pipe có tác dụng chuyển dòng chảy dữ liệu (data stream) từ output của chương trình này thành input của chương trình ở sau nó `A | B - Output(STDOUT) của chương trình A sẽ thành input (STDIN) của chương trình B`
+
+- Ví dụ: Liệt kê file, thư mục chứa từ "php"
+  - `$ ls ~ | grep php`
+
+### 4.2 Redirection
+
+- Redirection: dùng để điều hướng data stream giữa 1 chương trình và 1 file (**khác với pipe là 2 chương trình**).
+- Các ký hiệu của redirection bao gồm:
+
+  - `>` Xuất STDOUT vào file (overwrite)
+  - `>>` Xuất STDOUT vào file (append)
+  - `<` Đọc STDIN từ file (is used for input (stdin) redirection)
+  - `2>` Xuất STDERR vào file
 
 - Redirection the standard output of command to file
   - Kí tự '>' đại diện cho chuyển hướng đầu ra (STDOUT). Nếu câu lệnh được thực hiện thành công, nó sẽ gửi output của file vào destination.
@@ -211,3 +236,27 @@ mà không cần quan tâm nó có bao nhiêu kí tự ở phía trước địn
 - Redirection the standard error of command to file
 
 `Command 2> filebash` (2 là abbreviation của stderr)
+
+#### Các dạng chuyển hướng
+
+##### Chuyển hướng tới file
+
+- Dữ liệu đầu ra sẽ được lưu vào file thay vì in ra màn hình hiển thị.
+- Để chuyển hướng 1 câu lệnh tới file, Linux cung cấp cho người sử dụng 2 cú pháp: `>` (ghi nội dung file từ điểm bắt đầu, nếu file đã có nội dung thì ghi đè) và `>>` (cách này sẽ thêm nội dung vào cuối file mà không ghi đè)
+-
+
+##### Chuyển hướng từ file
+
+- Cách này giống với việc đọc dữ liệu từ file và sử dụng dữ liệu đó làm đầu vào cho chương trình
+- Ký hiệu: `<`
+
+##### Chuyển hướng tới stderr
+
+- Thông thường, khi gặp lỗi, thông tin sẽ hiển thị luôn lên màn hình cùng với các dữ liệu đầu ra
+- Linux cung cấp ký hiệu `2>` để đưa nội dung thông báo lỗi ra file thay vì màn hình hiển thị
+
+##### Tài liệu tham khảo về phần piping và redirection:
+
+[1]: [https://ryanstutorials.net/linuxtutorial/piping.php](https://ryanstutorials.net/linuxtutorial/piping.php)
+
+[2]: [http://www.linfo.org/pipes.html](http://www.linfo.org/pipes.html)

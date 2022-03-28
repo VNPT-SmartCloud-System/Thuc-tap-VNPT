@@ -5,10 +5,29 @@
 ## 1.1 Giới thiệu về Linux Distribution
 
 - **Linux Distribution** là các bản phân phối của linux - là một **hệ điều hành**, chúng đều dựa trên 3 nhánh chính để phát triển, đó là **Debian, Red Hat, Slackware**. Chúng đều có **Linux và Kernel**
+- **Thành phần**: Một bản distro thường bao gồm: một kernel Linux, các công cụ và thư viện GNU.
+- #### Kernel là gì?
 
-  - > Kernel là một chương trình máy tính, có nhiệm vụ quản lý các tài nguyên hệ thống, được khởi chạy trong quá trình khởi động hệ thống (sau bootloader)
+  - Kernel là một chương trình máy tính, có nhiệm vụ quản lý các tài nguyên hệ thống, được khởi chạy trong quá trình khởi động hệ thống (sau bootloader)
+  - Kernel thường cung cấp các tiện ích xử lý này cho các tiến trình của các phần mềm ứng dụng qua các cơ chế liên lạc giữa các tiến trình (inter-process communication) và các hàm hệ thống (system call)
 
-- **Thành Phần**: Một bản distro thường bao gồm: một kernel Linux, các công cụ và thư viện GNU.
+- #### Quy định về phiên bản của Linux Kernel
+
+  - Phiên bản của Linux được tách ra làm 3 nhóm, phân cách nhau bằng 2 dấu chấm.
+    - Số thứ nhất là chỉ phiên bản
+    - Số thứ hai: là để chỉ cho tình trạng phiên bản. Nếu số này là số chẵn, nó sẽ đại diện cho phiên bản ổn định, có thể dùng cho môi trường sản phẩm. Nếu số này là lẻ, nó chỉ định cho phiên bản không ổn định, nó thường dùng trong môi trường Development. Các kernel thuộc dạng này thường có nhiều bugs và không ổn định. Nếu dùng các phiên bản này để tìm bugs và thông báo cho nhóm phát triển Linux kernel thì rất ổn. Tuy nhiên không nên dùng phiên bản Development cho môi trường Production.
+    - Số thứ 3 là để chỉ cho số hiệu phát hành của một phiên bản Linux Kernel. Một phiên bản ổn định của một Linux kernel có thể có nhiều số liệu phát hành khác nhau.
+
+- #### Hierarchical Protection Domains
+
+  - Hierachical Protection Domains (hay Protection Rings) là cơ chế nhằm bảo vệ dữ liệu và chức năng của một chương trình tránh khỏi nguy cơ lỗi hoặc bị truy cấp trái phép bởi các chương trình khác.
+  - Một Protection Ring là một mức độ (mode/level/layer) truy cập tài nguyên hệ thống. Số lượng Ring tùy thuộc vào kiến trúc CPU và hệ điều hành chạy trên kiến trúc đó có khả năng hỗ trợ được bao nhiêu Ring
+  - Ring thường được sắp xếp có thứ bậc, từ mức có đặc quyền nhất (dành cho most trusted, thường được đánh số 0) đến có ít đặc quyền nhất (least trusted, thường được đánh số cao nhất của Ring).
+
+![ring-image](02_linux_distribution_image/ring-image.png)
+
+- Ring 0 là level được ưu tiên cao nhất, có thể tương tác trực tiếp với phần cứng như là CPU và Memory.
+- Ring 3 là cho User Mod, Ring 3 sẽ bị hạn chế quyền hơn so với Ring 0. Ring 3 là cho User Mod, Ring 3 sẽ bị hạn chế quyền hơn so với Ring 0. Chúng ta có thể ấn vào đây để xem chi tiết [What can each ring do?](https://stackoverflow.com/questions/18717016/what-are-ring-0-and-ring-3-in-the-context-of-operating-systems)
 
 ## 1.2 Loại hình và xu hướng phát triển
 
@@ -96,9 +115,9 @@ Vì thế nên sẽ chia ra các nhánh để phục vụ cho từng công việ
 
 - Fedora có thể dùng cho máy trạm, thậm chí là máy chủ, dành cho những người đã có nhiều kinh nghiệm
 
-- 2 distro phổ biến nhất được phát triển dựa trên Fedora là ** Red Hat Enterprise Linux ** - với đối tượng hướng tới là các doanh nghiệp và công ty lớn (có tính phí), và **CentOS** - free và hướng tới đối tượng là người sử dụng máy tính cá nhân.
+- 2 distro phổ biến nhất được phát triển dựa trên Fedora là **Red Hat Enterprise Linux** - với đối tượng hướng tới là các doanh nghiệp và công ty lớn (có tính phí), và **CentOS** - free và hướng tới đối tượng là người sử dụng máy tính cá nhân.
 
-## Tổng quan lại: Các distro của Linux được mô tả như hình sau:
+## Tổng quan lại: Các distro của Linux được mô tả như hình sau
 
 ![Overview](02_linux_distribution_image/overview.png)
 
