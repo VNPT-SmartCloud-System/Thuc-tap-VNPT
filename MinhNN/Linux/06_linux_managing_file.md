@@ -598,3 +598,58 @@ sudo chgrp <groupname> <filename>
 sudo chown <username>:<groupname> <filename>
 
 ```
+
+## 5. Chỉnh sửa file với Vim, Nano
+
+### 5.1 Vim
+
+- Viết tắt của từ Vi IMproved là một bản sao,
+  với một số bổ sung, của trình soạn thảo vi của Bill Joy
+  cho Unix
+
+- Cài đặt Vim
+
+```sh
+sudo apt update
+sudo apt-get install vim
+```
+
+| Vim Command   | Explain                                                                                                     |
+| ------------- | ----------------------------------------------------------------------------------------------------------- |
+| Esc           | Đổi từ input mode thành command mode                                                                        |
+| i, a          | Đổi từ command mode thành input mode                                                                        |
+| o             | Mở dòng mới ngay dưới vị trí con trỏ đang chỉ và chuyển thành input mode                                    |
+| :wq           | Ghi vào file và quit                                                                                        |
+| w             | Ghi file với 1 tên mới                                                                                      |
+| dd            | Xoá dòng ở vị trí con trỏ hiện tại                                                                          |
+| yy            | Copy dòng ở vị trí con trỏ hiện tại                                                                         |
+| p             | paste nội dung đã copy vào vị trí con trỏ hiện tại                                                          |
+| v             | Mở visual mode, có thể dùng các phím mũi tên để đọc nội dung file, dùng d để cut phần đc chọn, và y để copy |
+| u             | Undo command cuối                                                                                           |
+| Ctrl -r       | Redo the last undo                                                                                          |
+| gg            | Đi lên đầu dòng của file                                                                                    |
+| G             | Đi xuống cuối dòng của file                                                                                 |
+| /text         | Tìm từ trong file, bắt đầu từ vị trí con trỏ đến cuối file                                                  |
+| ?text         | Tìm từ trong file, bắt đầu từ vị trí con trỏ trở về đầu file                                                |
+| ^             | Đến vị trí đầu tiên của dòng hiện tại                                                                       |
+| $             | Đến vị trí cuối của dòng hiện tại                                                                           |
+| !ls           | Thêm output của lệnh ls vào file đang thực thi                                                              |
+| :%s/old/new/g | Thay đổi tất cả các từ old trong file thành từ new trong file                                               |
+
+### 5.2 Nano
+
+Khi Vim và Emacs có thể là khá khó dùng đối với những người không biết dùng Linux, Nano là thì đơn giản và dễ dùng hơn. Đó là lý do tại sao nó trở thành text editors phổ biến nhất của hệ điều này Unix và những hệ điều hành sử dụng giao diện command line.
+
+- Cài đặt nano
+
+  - Trên Ubuntu / Debian
+
+  ```sh
+  sudo apt-get install nano
+  ```
+
+  - Trên RHEL / CentOS
+
+  ```sh
+  yum install nano
+  ```
