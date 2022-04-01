@@ -1,12 +1,33 @@
 # Linux Distribution
 
-# 1. Khái niệm  Linux Distribution
+# 1. Khái niệm Linux Distribution
+
 ## 1.1 Giới thiệu về Linux Distribution
+
 - **Linux Distribution** là các bản phân phối của linux - là một **hệ điều hành**, chúng đều dựa trên 3 nhánh chính để phát triển, đó là **Debian, Red Hat, Slackware**. Chúng đều có **Linux và Kernel**
+- **Thành phần**: Một bản distro thường bao gồm: một kernel Linux, các công cụ và thư viện GNU.
+- #### Kernel là gì?
 
-    - > Kernel là một chương trình máy tính, có nhiệm vụ quản lý các tài nguyên hệ thống, được khởi chạy trong quá trình khởi động hệ thống (sau bootloader)
+  - Kernel là một chương trình máy tính, có nhiệm vụ quản lý các tài nguyên hệ thống, được khởi chạy trong quá trình khởi động hệ thống (sau bootloader)
+  - Kernel thường cung cấp các tiện ích xử lý này cho các tiến trình của các phần mềm ứng dụng qua các cơ chế liên lạc giữa các tiến trình (inter-process communication) và các hàm hệ thống (system call)
 
- - **Thành Phần**: Một bản distro thường bao gồm: một kernel Linux, các công cụ và thư viện GNU.
+- #### Quy định về phiên bản của Linux Kernel
+
+  - Phiên bản của Linux được tách ra làm 3 nhóm, phân cách nhau bằng 2 dấu chấm.
+    - Số thứ nhất là chỉ phiên bản
+    - Số thứ hai: là để chỉ cho tình trạng phiên bản. Nếu số này là số chẵn, nó sẽ đại diện cho phiên bản ổn định, có thể dùng cho môi trường sản phẩm. Nếu số này là lẻ, nó chỉ định cho phiên bản không ổn định, nó thường dùng trong môi trường Development. Các kernel thuộc dạng này thường có nhiều bugs và không ổn định. Nếu dùng các phiên bản này để tìm bugs và thông báo cho nhóm phát triển Linux kernel thì rất ổn. Tuy nhiên không nên dùng phiên bản Development cho môi trường Production.
+    - Số thứ 3 là để chỉ cho số hiệu phát hành của một phiên bản Linux Kernel. Một phiên bản ổn định của một Linux kernel có thể có nhiều số liệu phát hành khác nhau.
+
+- #### Hierarchical Protection Domains
+
+  - Hierachical Protection Domains (hay Protection Rings) là cơ chế nhằm bảo vệ dữ liệu và chức năng của một chương trình tránh khỏi nguy cơ lỗi hoặc bị truy cấp trái phép bởi các chương trình khác.
+  - Một Protection Ring là một mức độ (mode/level/layer) truy cập tài nguyên hệ thống. Số lượng Ring tùy thuộc vào kiến trúc CPU và hệ điều hành chạy trên kiến trúc đó có khả năng hỗ trợ được bao nhiêu Ring
+  - Ring thường được sắp xếp có thứ bậc, từ mức có đặc quyền nhất (dành cho most trusted, thường được đánh số 0) đến có ít đặc quyền nhất (least trusted, thường được đánh số cao nhất của Ring).
+
+![ring-image](02_linux_distribution_image/ring-image.png)
+
+- Ring 0 là level được ưu tiên cao nhất, có thể tương tác trực tiếp với phần cứng như là CPU và Memory.
+- Ring 3 là cho User Mod, Ring 3 sẽ bị hạn chế quyền hơn so với Ring 0. Ring 3 là cho User Mod, Ring 3 sẽ bị hạn chế quyền hơn so với Ring 0. Chúng ta có thể ấn vào đây để xem chi tiết [What can each ring do?](https://stackoverflow.com/questions/18717016/what-are-ring-0-and-ring-3-in-the-context-of-operating-systems)
 
 ## 1.2 Loại hình và xu hướng phát triển
 
@@ -37,12 +58,11 @@ Vì thế nên sẽ chia ra các nhánh để phục vụ cho từng công việ
         -Gồm: Ubuntu, Open SUSE, Linux Mint
         -Đặc tính của chúng là phát triển trong thời gian ngắn, ứng dụng các công nghệ mới liên tục, nhóm này có GUI thân thiện với người dùng.
 
-
 # 2. Các nhánh distro phổ biến
 
 - Mặc dù có rất nhiều các distro, nhưng cơ bản đều dựa trên 3 nhánh chính đó là: **Debian, Red Hat, và Slackware**.
 - Do Linux nó là một open source nên có thể tùy biến theo ý của mình, miễn là dựa trên các license mà Linux đưa ra.
-- Sau một thời gian dài phát triển thì hiện nay, 2 nhánh distro phổ biến là **Debian và Fedora** 
+- Sau một thời gian dài phát triển thì hiện nay, 2 nhánh distro phổ biến là **Debian và Fedora**
 
 ## 2.1 Debian
 
@@ -52,16 +72,19 @@ Vì thế nên sẽ chia ra các nhánh để phục vụ cho từng công việ
 
 - Có 3 phiên bản khác nhau:
 
-    - Phiên bản ổn định mà người dùng được khuyến khích sử dụng.
-    - Phiên bản không ổn định.
-    - Phiên bản thử nghiệm cho những ai có mong muốn trải nghiệm phần mềm mới nhất.
+  - Phiên bản ổn định mà người dùng được khuyến khích sử dụng.
+  - Phiên bản không ổn định.
+  - Phiên bản thử nghiệm cho những ai có mong muốn trải nghiệm phần mềm mới nhất.
+
 - Hệ thống quản lý gói phần mềm sử dụng:
-    - `dpkg` cài đặt các gói phần mềm .deb
-    - `apt` cài đặt các phần mềm khác từ trên kho
+
+  - `dpkg` cài đặt các gói phần mềm .deb
+  - `apt` cài đặt các phần mềm khác từ trên kho
 
 - Có khả nhiều bản dựa trên distro Debian: Raspbian, Knoppix , Kali Linux và phổ biến nhất là **Ubuntu**
 
 ### 2.1.1 Ubuntu
+
 ![Ubuntu](02_linux_distribution_image/ubuntu.png)
 
 - Do công ty Canonical phân phối, chỉ mới xuất hiện vào quý 3/2004 và không lâu sau đó đã trở nên phố biến.
@@ -92,13 +115,11 @@ Vì thế nên sẽ chia ra các nhánh để phục vụ cho từng công việ
 
 - Fedora có thể dùng cho máy trạm, thậm chí là máy chủ, dành cho những người đã có nhiều kinh nghiệm
 
-- 2 distro phổ biến nhất được phát triển dựa trên Fedora là ** Red Hat Enterprise Linux ** - với đối tượng hướng tới là các doanh nghiệp và công ty lớn (có tính phí), và **CentOS** - free và hướng tới đối tượng là người sử dụng máy tính cá nhân.
+- 2 distro phổ biến nhất được phát triển dựa trên Fedora là **Red Hat Enterprise Linux** - với đối tượng hướng tới là các doanh nghiệp và công ty lớn (có tính phí), và **CentOS** - free và hướng tới đối tượng là người sử dụng máy tính cá nhân.
 
-
-## Tổng quan lại:  Các distro của Linux được mô tả như hình sau:
+## Tổng quan lại: Các distro của Linux được mô tả như hình sau
 
 ![Overview](02_linux_distribution_image/overview.png)
-
 
 # 3. Tài liệu tham khảo
 
@@ -108,4 +129,4 @@ Vì thế nên sẽ chia ra các nhánh để phục vụ cho từng công việ
 
 [3] Linux là gì? - [What is Linux?](https://vi.wikipedia.org/wiki/B%E1%BA%A3n_ph%C3%A2n_ph%E1%BB%91i_Linux)
 
-[4] Một số tài liệu về [Debian](https://vi.wikipedia.org/wiki/Debian), [Fedora](https://vi.wikipedia.org/wiki/Fedora), [Red Hat Enterprise Linux](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux), [CentOs](https://www.centos.org/about/)
+[4] Một số tài liệu về [Debian](https://vi.wikipedia.org/wiki/Debian), [Fedora](https://vi.wikipedia.org/wiki/Fedora), [Red Hat Enterprise Linux](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux), [CentOs](https://wwwcentos.org/about/)
