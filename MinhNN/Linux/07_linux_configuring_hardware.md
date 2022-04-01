@@ -306,7 +306,7 @@ Found invalid GPT and valid MBR; converting MBR to GPT format in memory. THIS OP
 
 1. Giới thiệu
 
-   - Khác với windows, Linux sử dụng một cây thư mục (folder tree) thống nhất, trong đó mỗi phân vùng được gắn kết tại một điểm gắn kết trên cây đó.
+   - Khác với Windows, Linux sử dụng một cây thư mục (folder tree) thống nhất, trong đó mỗi phân vùng được gắn kết tại một điểm gắn kết trên cây đó.
    - Khi dùng Linux thì bạn không thể truy cập vào file system, rất có thể là do bạn chưa thực hiện mount. Tức là phải gắn vào một thư mục trống bất kỳ có sẵn trên cây thư mục của Linux thì bạn mới có thể truy cập vào filesystem đó.
    - Thư mục trống mà gắn với thiết bị kể trên được gọi là mount point
    - Sau khi mount thiết bị, bạn có thể truy cập tới dữ liệu trong thiết bị bằng cách truy cập vào mount point. Bạn cần thực hiện thao thác unmount để hủy gắn kết thiết bị với hệ thống khi không còn cần truy cập tới thiết bị nữa
@@ -317,7 +317,7 @@ Found invalid GPT and valid MBR; converting MBR to GPT format in memory. THIS OP
 mount -t <type> -o <option> <device file> <mount point>
 ```
 
-- 2.1 Mount ổ cứng
+- 2.1 Mount ổ cứng bằng lệnh `mount`
 
   - Khi bạn gắn thêm ổ cứng vào máy tính/server chạy hệ điều hành Linux, hệ thống sẽ nhận ổ cứng đó với một device file đặt ở thư mục /dev.
   - Để kiểm tra danh sách ổ cứng và phân vùng được nhận trên Linux bạn sử dụng lệnh sau:
@@ -333,4 +333,75 @@ mount -t <type> -o <option> <device file> <mount point>
   ```sh
   $ mount -t ext4 -o defaults /dev/sdb1 /home/tmp/
 
+  ```
+
+  - `-o defaults` ở đây bao gồm rw, suid, dev, exec, auto, nouser và async.
+
+        - `rw`mount ở read/write mode
+        - `suid` enable SUID hay SGID
+        - `dev` cho phép sử dụng các ký tự đặc biệt, device and block special device trên file hệ thống
+        - `exec` cho phép thực thi trên binary
+        - `auto` nếu option -a được chỉ định, ổ cứng sẽ auto mount
+        - `nouser` người dùng thông thường (không phải super user) thì không được phép thực thi lệnh mount
+        - `aync` đối với file hệ thông thì mọi I/O sẽ được tiến hành không đồng bộ
+        - `nosuid` SUID cũng như SGID bị disable
+        - `nodev` các ký tự, ký tự đặc biệt, device block, special device…sẽ không sử dụng được
+        - `noexec` không được phép trực tiếp execute binary
+        - `noauto` nếu option -a được chỉ định, ổ cứng sẽ không auto mount
+        - `user` cho phép general user được quyền mount ổ cứng
+        - `users` cho phép toàn bộ user đều có thể mount/unmount ổ cứng
+        - `remount` mount lại 1 file hệ thống đang được mount
+
+    ro mount với readonly
+
+  - Để kiểm tra `mount` diễn ra thành công hay chưa, gõ `df -h`
+  - Bình thường làm theo cách này, sau khi reset lại máy, mount sẽ mất hết
+  - Tuy nhiên, ta có thể giữ các mount này bằng cách mở file `/etc/fstab` và thêm dòng sau vào cuối file:
+  - Ví dụ:
+
+    - ```sh
+      /dev/sdb1 /home/tmp/ ext4 defaults 0 0
+      echo "/dev/sdb1 /home/tmp/ ext4  defaults     0   0" >> "/etc/fstab"
+      ```
+
+      | Column 1            | Column 2    | Column 3                                         | Column 4                                                | Column 5                                  | Column 6                    |
+      | ------------------- | ----------- | ------------------------------------------------ | ------------------------------------------------------- | ----------------------------------------- | --------------------------- |
+      | Device or Partition | Mount Point | File system (ext2, ext3, ext4, swap, vfat, ntfs) | Mount option: auto, no-auto, user, no-user, ro, rw .... | DUMP for backup, by default its value = 0 | fsck check error filesystem |
+      | /dev/sdb1           | /DATA       | ext3                                             | defaults                                                | 0                                         | 0                           |
+
+  - 2.2 Mount ổ cứng bằng `UUID`
+  - Tại sao phải mount ổ cứng bằng UUID?
+
+        - Nếu chỉ gắn thêm vào hệ thống một ổ cứng thì mount theo device file trên kia là được, nhưng nếu từ 2 ổ cứng trở lên, khi khởi động lại máy sẽ gặp trường hợp ổ cứng này được mount vào thư mục kia. Nguyên nhân ở việc hệ thống ngẫu nhiên nhận device file của ổ cứng khi khởi động lại máy.
+
+    Ví dụ:
+
+    - HDD1 có device file là /dev/sdb1
+    - HDD2 có device file là /dev/sdc1
+
+    Nhưng sau khi khởi động lại thì HDD2 lại là /dev/sdb1, và ngược lại
+
+    Để khắc phục điều này, mỗi ổ cứng đều đổ một UUID duy nhất, do đố nếu mount ổ cứng theo UUID sẽ khắc phục được vấn đề trên
+
+  Để check UUID, ta dùng:
+
+  ```sh
+  $ sudo blkid
+  ```
+
+  Example:
+  Mở file `/etc/fstab/` và thêm dòng này vào cuối file:
+
+  ```sh
+
+  $ UUID=fb315fe6-xxxx-xxxx-8d30-80f44a874420 /home/tmp/ ext4 defaults 0 0
+
+  $ echo "UUID=fb315fe6-xxxx-xxxx-8d30-80f44a874420      /home/tmp/   ext4    defaults     0   0" >> "/etc/fstab"
+
+  ```
+
+  2.2 Unmount ổ cứng
+
+  ```sh
+  $ umount <file_mount>
   ```

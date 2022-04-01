@@ -653,3 +653,15 @@ Khi Vim và Emacs có thể là khá khó dùng đối với những người kh
   ```sh
   yum install nano
   ```
+
+| Nano Options         | Meaning                                                                                                                                                                                 |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ctrl + G             | Mở menu trợ giúp Nano.                                                                                                                                                                  |
+| Ctrl + O             | Lưu file đang mở. Nano sẽ yêu cầu bạn xác nhận tên file khi thực hiện việc này, vì vậy chỉ cần nhấn `Enter` để xác nhận.                                                                |
+| o                    | Mở dòng mới ngay dưới vị trí con trỏ đang chỉ và chuyển thành input mode                                                                                                                |
+| Ctrl + C             | Hủy bỏ bất kỳ lệnh chờ xử lý nào.                                                                                                                                                       |
+| Ctrl + X             | Thoát khỏi Nano. Điều này cũng sẽ nhắc bạn xem bạn có muốn lưu file hay không, nếu bạn đã thực hiện bất kỳ thay đổi nào đối với nó. Nhấn `Enter` để xác nhận nếu bạn muốn lưu thay đổi. |
+| Ctrl + W             | Mở hộp tìm kiếm. Nhập vào đây để xác định vị trí phần văn bản nhất định.                                                                                                                |
+| Ctrl + K             | Xóa dòng văn bản hiện tại.                                                                                                                                                              |
+| Ctrl + \_            | Di chuyển đến một số dòng nhất định. Nhập số dòng và nhấn nút `Enter` để xác nhận                                                                                                       |
+| Ctrl + \\(BackSlash) | Tìm và thay thế văn bản. Nhập văn bản bạn muốn tìm để thay thế, sau đó nhấn `Enter`                                                                                                     |
