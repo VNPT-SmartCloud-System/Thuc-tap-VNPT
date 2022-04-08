@@ -46,7 +46,22 @@ So sánh LEGACY BIOS và UEFI
 
 ### 2.1 Thông tin trong các tập tin cấu hình GRUB2
 
-- GRUB là Grand Unified Bootloade, là một chương trình khởi động máy tính được phát triển bởi dự án GNU. GRUB cho phép người dùng có thể chọn khởi động 1 trong nhiều hệ điều hành được cài trên một máy tính.
+- GRUB (GRand Unified Bootloader) là một chương trình khởi động máy tihs được phát triển bởi dự án GNU.
+- GRUB cho người dùng khởi động một trong hệ điều hành được cài trên máy tính.
+
+  #### Các tính năng của GRUB:
+
+  - Hỗ trợ nhiều hệ điều hành - bằng cách khởi động trực tiếp nhân hệ điều hành hoặc bằng cách nạp chuỗi (chain-loading)
+  - Hỗ trợ nhiều hệ thống tệp tin: BSD, FFS, DOS FAT16 và FAT32, Mini fs, Linux ext2fs và ext3fs, JSF, XFS, VSTa fs
+  - Cung cấp giao diện command linh hoạt, hỗ trợ tập tin cấu hình
+
+  #### Các phiên bản của GRUB:
+
+  - GRUB phiên bản 1 hay còn được gọi là GRUB legacy, chỉ phổ biến ở các phiên bản cũ của các bản Linux Distribution, trong đó vẫn còn đang được sử dụng và hỗ trợ như CentOS 5
+
+  - GRUB phiên bản 2, được gọi là GRUB2, được viết lại từ đầu và có ý định thay thế phiên bản tiền nhiệm, được sử dụng bởi đa số các bản phân phối Linux ngày nay
+
+  <!-- - GRUB là Grand Unified Bootloade, là một chương trình khởi động máy tính được phát triển bởi dự án GNU. GRUB cho phép người dùng có thể chọn khởi động 1 trong nhiều hệ điều hành được cài trên một máy tính.
 
 Chỉnh sửa tệp cấu hình GRUB
 
@@ -67,7 +82,7 @@ sudo nano / etc / default / grub
   - Để ngăn GRUB tự động khởi động và luôn đợi bạn chọn một hệ điều hành, hãy thay đổi dòng thành **GRUB_TIMEOUT = -1**
 - **Chọn hình nền:** Các **GRUB_BACKGROUND**dòng kiểm soát xem hình nền có được sử dụng hay không – theo mặc định, GRUB sử dụng giao diện đơn sắc trắng trên đen. Bạn có thể thêm một dòng như **GRUB_BACKGROUND = / home / user / Pictures / background.png** để chỉ định một tệp hình ảnh mà GRUB sẽ sử dụng.
 
-![example-grub-image](images/example-grub-image.png)
+![example-grub-image](images/example-grub-image.png) -->
 
 ### 2.2 EFI (Extensible Firmware Interface Firmware)
 
@@ -212,3 +227,5 @@ $ sudo systemctl reload-or-restart application.service
 - Scalability: khả năng tùy biến, thu hẹp hay mở rộng mô hình server dễ dàng mà không làm gián đoạn ứng dụng
 - Optimization: sử dụng triệt để nguồn tài nguyên phần cứng và tránh lãng phí bằng cách giảm số lượng thiết bị vật lý cần thiết (giảm số lượng server, switch, cáp, v.v. )
 - Management: khả năng quản lý tập trung, giúp việc quản lý trở nên dễ dàng hơn bao giờ hết.
+
+![GRUB Bootloader](https://viblo.asia/p/tim-hieu-ve-grub-bootloader-jvElaOYYKkw)
