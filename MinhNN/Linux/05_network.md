@@ -1,6 +1,7 @@
 ## Overview
 1. VLAN
 2. Trunking
+3. VTP (VLAN Trunking Protocol)
 
 
 
@@ -81,6 +82,66 @@
     - Canonical Format Indicator (1bit) cho biết địa chỉ MAC đang được sử dụng ở định dạng Token Ring hay Ethernet Frame.
     - VLAN ID(12bit): cho biết Frame đang chạy trên đường trunk là của VLAN nào.
 
+- Khi switch nhận Frame có tag 802.1Q, nó sẽ kiểm tra xem Frame này đến từ VLAN nào. Sau đó nó gỡ bỏ tag và trả về frame mà đúng VLAN thuộc về.
+
+##### 2.2.2 Chuẩn Cisco và kỹ thuật trunking ISL
+
+- Kỹ thuật Trunking này của Cisco tiến hành chèn thêm Header 26 byte và trường CRC kiểm tra lỗi 4 byte vào Ethernet Frame.
+
+![](images/trunk4.png)
+
+- Các trường trong ISL Tag bao gồm:
+    - DA(Destination Address): 40 bit sẻ set ở dạng 0x01-00-0C-00-00″ or “0x03-00-0c-00-00”. Để báo hiệu bên nhận rằng frame được tag ở dạng ISL.
+
+    - Type: 4bit chỉ ra type frame được và sử dụng là gì (0000:Ethernet, 0001: Token ring….).
+
+    - User: 4bit chỉ ra độ ưu tiên của frame khi đi qua switch(XX00: normal priority, XX01: priority 1, XX10: priority 2, XX11: highest priority).
+
+    - SA(Source Address): 48 bit địa chỉ nguồn của gói tin ISL. Tuy nhiên thiết bị nhận có thể bỏ qua địa chỉ này.
+
+    - LEN(Length): 16bit cho biết kích thước của gói tin thực tế.
+
+    - AAAA03 là một giá trị 24bit liên tục của  0xAAAA03.
+HSA(High Bits of Source Address):24 bit trường này chứa giá trị “0x00-00-0C.
+
+    - BPDU: được set để tất cả gói tin BPDU được tag ISL(hoạt động trên STP).
+
+    - INDEX: 16bit chỉ ra chỉ số port nguồn của gói tin tồn tại trên Switch.
+
+    - RES: dài 16bit sử dụng khi Token ring hoặc FDDI được đóng gói frame ISL, với frame Ethernet trường RES được set tất cả bit 0.
+
+
+### 3. VLAN Trunking Protocol (VTP)
+#### 3.1 Đặc điểm
+- Giúp cho việc cấu hình VLAN luôn đồng nhất khi thêm, xóa, sửa thông tin về VLAN trong hệ thống mạng.
+
+- VTP hoạt động trên các đường Trunking Layer 2 để trao đổi thông tin VLAN với nhau
+
+- 3 yếu tố quan trọng của VTP là : VTP domain, VTP password, VTP mode(Server, Client, Transparent). Trong đó
+VTP domain : các switch được tổ chức cùng thuộc một domain mới có thể chia sẻ thông tin VLAN với nhau.
+
+
+#### 3.2 VTP Mode
+
+![](images/vlan5.png)
+<!-- - **Server** : switch hoạt động ở mode này có toàn quyền quyết định tạo, xóa, sửa thông tin VLAN. Đồng bộ thông tin VLAN từ các Switch khác, Forward thông tin VLAN đến các Switch khác.
+
+-  **Client**: switch hoạt động ở mode này không được thay đổi thông tin VLAN mà chỉ nhận thông tin VLAN từ Server. Đồng bộ thông tin VLAN từ switch khác và forward thông tin VLAN.
+
+-  **Transparent**: switch hoạt động ở mode này không tiến hành tiếp nhận thông tin VLAN. Nó vẫn nhận được thông tin VLAN từ các Switch khác nhưng không tiến hành đồng bộ thông tin VLAN. Có thể tạo, xóa, sửa VLAN độc lập trên nó. Không gửi thông tin VLAN của bản thân cho các Switch khác nhưng nó có thể forward thông tin VLAN nhận được đến các Switch khác. -->
+
+#### 3.3 Revision Number
+- Mặc định số Revision giữa các switch đều bằng 0.
+- Khi có thay đổi Revision Number sẽ tăng lên 1 đơn vị
+
+#### 3.4 VTP Pruning
+
+
+![](images/vlan3.jpeg)
+
+- Thông thường, khi VLAN 10 gửi Frame đến host khác thuộc VLAN 10 nhưng nằm ở switch khác. Vì mỗi VLAN là một broadcast domain nên frame này sẽ được truyển đến tất cả các host thuộc VLAN 10 của switch 2. Mặc định khi đi trên trunk nó sẽ cho qua dữ liệu của tất cả VLan nên switch 4 cũng nhận được frame này. 
+
+- Khi được bật tính năng VTP Prunning. Switch 4 sẻ gửi thông điệp báo cho switch 1 rằng nó không cần dữ liệu của VLAN 10(vì không tồn  tại VLAN10). Và khi switch 1 khi nhận được frame broadcast này sẻ tiến hành chặn frame này không forward nó qua đường trunk đến các SW không tồn tại VLAN 10(switch 4).
 
 Tài liệu tham khảo:
 
@@ -91,3 +152,6 @@ Tài liệu tham khảo:
 - [Trunking 1](https://www.totolink.vn/article/97-vtp-la-gi-vlan-trunking-protocol-la-gi.html#:~:text=K%E1%BA%BFt%20n%E1%BB%91i%20%E2%80%9Ctrunk%E2%80%9D%20l%C3%A0%20li%C3%AAn,VLAN%20tr%C3%AAn%20h%E1%BB%87%20th%E1%BB%91ng%20m%E1%BA%A1ng.)
 
 - [Trunking 2](https://itforvn.com/bai-6-vlan-trunking-vtp/)
+
+
+- [VTP 1](https://itforvn.com/bai-6-vlan-trunking-vtp/)
