@@ -1,14 +1,14 @@
 ## Overview
 
 1. Spanning Tree Protocol (STP)
-2. Open Shortest Path First (OSPF)
+<!-- 2. Open Shortest Path First (OSPF) -->
 
 <!-- EIGRP (Enhanced Internet Gateway Routing Protocol) -->
 
-- Chống loop cho giao thức chuyển mạch layer 2
+<!-- - Chống loop cho giao thức chuyển mạch layer 2
 - Broadcast storm
 - Instability Mac-Address-Table
-- Multi-frame copies
+- Multi-frame copies -->
 
 
 
@@ -158,8 +158,13 @@ Ví dụ:
 
 #### Tiến trình chạy STP
 - Khi Spanning Tree Protocol chạy. Cổng bị đưa vào trạng thái Blocking sẻ bị khóa ngay lập tức. Còn các cổng như Root và Designated port thì phải trải qua các trạng thái Listening(15s) rồi tiếp tục chuyển sang trạng thái Learning(15s). Rồi mới chuyển sang trạng thái Forwarding để forward được dữ liệu.
--  Đợi tiến trình STP chạy hết để chống loop qua các trạng thái Listening và Learning mất 30s khá lâu. Cho nên Cisco đã đưa ra một số các tính năng nhằm hạ thấp khoảng thời gian timer này lại như: Portfast, Uplinkfast, Backbonefast hay version Rapid SPAN IEEE 802.1W.
 
+-  Đợi tiến trình STP chạy hết để chống loop qua các trạng thái Listening và Learning mất 30s khá lâu. Cho nên Cisco đã đưa ra một số các tính năng nhằm hạ thấp khoảng thời gian timer này lại như: Portfast, Uplinkfast, Backbonefast hay version Rapid SPAN IEEE 802.1W.
+- Việc chuyển từ trạng thái: Blocking sang listening mất 20(s)
+- Việc chuyển từ trạng thái: Listening sang Learning mất 15(s)
+- Việc chuyển từ trạng thái: Learning sang Forwarding mất 15(s)
+
+Vậy khi Switch khởi động xong hoặc khi cắm dây vào port thì phải mất 30(s) đèn chuyển sang màu xanh.
 #### Tài liệu tham khảo: 
 [STP 1](https://vnpro.vn/thu-vien/tim-hieu-ve-giao-thuc-spanning-tree-protocol-3115.html)
 
