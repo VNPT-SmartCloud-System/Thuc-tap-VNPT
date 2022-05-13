@@ -147,10 +147,14 @@ Các thuật ngữ liên quan đến Area-ID:
 
 
 #### Tài liệu tham khảo:
+
 [OSPF Security Zone](https://securityzone.vn/t/bai-14-tim-hieu-giao-thuc-dinh-tuyen-ospf.101/)
 
 [Link State OSPF](https://www.daihockhonggiay.com/blogs/post/link-state-ospf)
 
 [OSPF Hosting Viet](https://hostingviet.vn/giao-thuc-ospf)
 
-[Tài liệu về subnet mask](https://hocmangcoban.blogspot.com/2014/04/network-subnet-subnet-mask-broadcast.html)
+[Tài liệu về subnet mask cơ bản 1](https://hocmangcoban.blogspot.com/2014/04/network-subnet-subnet-mask-broadcast.html)
+
+[Tài liệu về subnet mask cơ bản 2](https://vietnix.vn/subnet-mask-la-gi/)
+
