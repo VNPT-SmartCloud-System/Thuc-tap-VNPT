@@ -47,10 +47,9 @@ Ta có thể cấu hình để chọn Router-id = 100.100.100.100. Ip này khôn
 - OSPF sử dụng địa chỉ multilcast : 224.0.0.5 khác với RIPv2 224.0.0.9
 - Điều kiện để thiết lập quan hệ láng giềng:
     - Cùng Area-ID
-    - 2
-    - 3
-    - 4
-    - 5
+    - Cùng subnet và subnet-mask
+    - Cùng hello-timer và dead-timmer
+    - Thoả mãn điều kiện xác thực
 
 **Điều kiện 1: Cùng Area-ID**: 
 - Cùng Area-id: Khi mạng lớn người ta chia làm nhiều vùng, vùng nào hỏng thì chỉ vùng đó chịu tác động. Mỗi một vùng sẽ đặt cho một Area-id. Vùng trung tâm có Area-id phải bằng 0. Mọi vùng khác phải có đường truyền trực tiếp về vùng 0 nó mới truyền được dữ liệu.
