@@ -5,7 +5,7 @@
 ### 1. Giao thức định tuyến OSPF
 
 - Giao thức định tuyến OSPF là giao thức định tuyến động thuộc nhóm Link State. 
-- Trên mỗi Router đều có bảng định tuyến thông qua việc đồng nhất bảng cơ sở dữ liệu trạng thái đường link (LSDB - Link State Database). Từ bản đồ mạng này Router sẽ tự tính toán ra đường đi ngắn nhất và xây dựng bảng định tuyến cho nó.
+- Trên mỗi Router đều có bảng định tuyến thông qua việc đồng nhất bảng cơ sở dữ liệu trạng thái đường link (LSDB - Link State D atabase). Từ bản đồ mạng này Router sẽ tự tính toán ra đường đi ngắn nhất và xây dựng bảng định tuyến cho nó.
 
 #### 1.1 Đặc điểm của OSPF
 
@@ -76,7 +76,7 @@ Các thuật ngữ liên quan đến Area-ID:
     - 2 router cùng mạng nhưng không thể làm neighbor của nhau vì không cùng subnet-mask
 
 **Điều kiện 3: Cùng Hello Timer và Dead Timer:**
-- `Hello Timer` là khoảng thời gian định kỳ  router gửi các gói tin hello ra các cổng chạy OSPF
+- `Hello Timer` là khoảng thời gian định kỳ router gửi các gói tin hello ra các cổng chạy OSPF
 - `Dead Timer` là khoảng thời gian mà láng giềng chờ hello timer gửi gói tin cho mình. Nếu hết khoảng thời gian Dead Timer mà router đó không nhận đước các gói tin hello từ láng giếng, nó sẽ tự động xoá bộ dữ liệu được học từ láng giềng này.
 - Giá trị mặc định của `Hello Timer / Dead Timer` là `10s/40s`
 **Điều kiện 4: Thoả mãn điều kiện xác thực:**
