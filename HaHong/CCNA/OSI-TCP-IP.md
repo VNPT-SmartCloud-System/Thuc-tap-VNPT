@@ -1,0 +1,61 @@
+
+# OSI Model (Open Systems Interconnection)
+Nhằm tạo ra chuẩn giao tiếp chung khi tích hợp nhiều nhà cùng cấp. Mô hình OSI bao gồm 7 tầng. Mỗi tầng đều có đặc tính là chỉ sử dụng chức năng của tầng dưới nó và chức năng của mình.
+*7 tầng  của OSI có 3 tầng dưới được thực hiện trên kênh truyền( định nghĩa thiết bị phần cứng cho kết nối); 4 tầng trên thực hiện trên các host( giao tiếp người dùng)*
+
+![Mô hình OSI](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/OSI_Model_v1.svg/800px-OSI_Model_v1.svg.png)
+
+1. Physical(Bits)
+ - Biến đổi dòng bit logic thành tín hiệu vật lý phù hợp với đường truyền vật lý (ở bên phát) và ngược lại ( ở ben thu): điều chế/ giải điều chế, biến đổi và khôi phục tín hiệu.
+   - Thành phần vật lý: NIC, cáp đồng, cáp quang,... 
+   - Encoding(HDB3, NRZ, Manchester)
+   - Signaling(0,1)  
+2. Data Link(Frames)
+![Đóng gói và mở gói dữ liệu](https://vnpro.vn/upload/user/images/Tin%20T%E1%BB%A9c/1(2).jpg)
+
+ -Phát hiện và sửa lối khi truyền dữ liệu giữa các thực thể trong mạng(switch, router, thiết bị đầu cuối)
+ -Nhận dữ liệu từ lớp Netwwork, đóng gói dữ liệu lớp Network vào các khung( frame) phù hợp với mạng vật lý
+3. Network (Packets)
+ -Định tuyến trên một mạng gồm nhiều nút trung gian giữa nguồn và đích
+ -Đánh địa chỉ lớp mạng(IPv4 or IPv6)
+4. Transport (Segments)
+ -Chia nhỏ các gói tin có kích thước lớn khi gửi và tập hợp lại khi nhận giúp cho việc truyền dữ liệu trên đường truyền dễ dàng và tránh các trễ.
+ -Đảm bảo truyền dữ liệu tin cậy giữa 2 thiết bị đầu cuối
+5. Session (Data)
+ - Quản lý các kết nối được thiết lập trên cùng một máy tính từ một hay nhiều ứng dụng khác nhau.
+ - Cung cấp cơ chế nhận biết tên và chức năng về bảo mật thông tin khi truyền qua mạng máy tính
+6. Presentation (Data)
+ - Biến đổi định dạng dữ liệu từ các ứng dụng thành một định dạng chung được quy định bởi thiết bị đầu cuối. Đảm bảo cho các máy tính có định dạng dữ liệu khác nhau vẫn có thể truyền thông tin với nhau bình thường.
+7. Application (Data)
+Cung cấp các giao diện lập trình cho ứng dụng của người sử dụng
+# TCP/IP 
+Mô hình TCP/IP có các chức năng tương đương với mô hình OSI nhưng chỉ có 4 tầng
+![Mô hình TCP/IP](https://wiki.matbao.net/wp-content/uploads/2021/04/mo-hinh-tcp-ip-3.jpg)
+1. Network Access(Frame)
+ - Physical: Biến đổi dòng bít logic thành tín hiệu vật lý phù hợp với đường truyền vật lý
+ - MAC( Medium Access Control):điều khiển NIC và phần cứng chịu trách nhiệm gửi và nhận dữ liệu.
+    - Quy định đánh điạ chỉ và điều khiển truy nhập kênh cho các thiết bị mạng
+ - LLC( Logiccal Link Control):giao tiếp giữa phần mềm mạng ở các lớp trên và phần cứng thiết bị ở các lớp dưới.
+    - Ghép kênh
+    - Điều khiển luồng
+=> Lớp con LCC tạo ra tính năng linh hoạt trong việc phục vụ cho các giao thức lớp mạng trên nó, trong khi vẫn liên lạc hiệu quả với các kỹ thuật khác nhau bên dưới nó. LLC với vai trò là lớp phụ tham gia vào quá trình đóng gói. LLC nhận đơn vị dữ liệu giao thức lớp mạng, như là các gói IP, và thêm nhiều thông tin điều khiển vào để giúp phân phối gói IP đến đích của nó. Nó đóng gói trở lại dạng IP, sau đó chuyển xuống lớp phụ MAC để tiến hành các kỹ thuật đặc biệt được yêu cầu cho đóng gói tiếp theo. 
+2. Internet Layer (Packets)
+ - Nhiệm vụ của tầng mạng trên mô hình TCP/IP là giải quyết vấn đề các gói tin qua các mạng để đến đúng đích mong muốn
+3. Transport Layer (segment)
+ - Phân nhỏ các gói tin có kích thước lớn khi gửi và tập hợp lại khi nhận, đảm bảo tính toàn vẹn cho dữ liệu.
+4. Application Layer (Data)
+- Giống mô hình OSI
+# OSI and TCP/IP Model Comparison
+![Mô hình so sánh](https://2.bp.blogspot.com/--LdXEFHRLz0/UzQeMLNUyzI/AAAAAAAAADE/YAQAXBPEVqg/s1600/OSI-TCP-IP2.jpg)
+
+Đối với giao thức TCP/IP thì tầng phiên và tầng trình diễn được kết hợp với nhau trong tầng ứng dụng. Còn đối với mô hình OSI thì mỗi tầng khác nhau sẽ thực hiện một nhiệm vụ khác nhau.
+
+Về thiết kế thì các giao thức trong TCP/IP được thiết kế trước rồi sau đó mới phát triển mô hình. Ngược lại trong OSI thì mô hình được phát triển trước sau đó mới phát triển giao thức.
+
+Nguồn tham khảo:
+[OSI-TCP/IP](https://hocmangcoban.blogspot.com/2014/04/mo-hinh-osi-va-tcpip.html)
+
+Chú ý:
+Lớp vật lý: Hub là một bộ khuyếch đại tín hiệu và không có cơ chế kiểm tra trạng thái kênh
+Lớp Mac: Bridge (cho phép kết nối nhiều mạng LAN với nhau, cho phép phân mảnh một mạng LAN lớn thành nhiều segment hay nhiều vùng quảng bá nhỏ), Switch
+Lớp Mạng: Router
