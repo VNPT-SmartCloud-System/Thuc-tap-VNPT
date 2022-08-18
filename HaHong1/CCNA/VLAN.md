@@ -50,4 +50,4 @@ Kết nối giữa hai thiết bị chuyển mạch là một liên kết trung 
 # Ứng dụng
 - Sử dụng VLAN để tạo các mạng LAN khác nhau của nhiều máy tính cùng văn phòng:
 - Sử dụng VLAN để tạo mạng dữ liệu ảo (Virtual Data Network - VAN)
-- Hữu ích cho những nhóm người dùng cần tính bảo mật cao, hoặc không thích mạng bị chậm do số lượng broadcast lớn
+- Hữu ích cho những nhóm người dùng cần tính bảo mật cao, hoặc không thích mạng bị chậm do số lượng broadcast lớn.
