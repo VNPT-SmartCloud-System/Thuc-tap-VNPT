@@ -1,4 +1,4 @@
-Với mạng LAN thông thường, các máy tính trong cùng một địa điểm có thể được kết nối với nhau thành một mạng LAN, chỉ sử dụng một thiết bị tập trung như hub hoặc switch. Có nhiều mạng LAN khác nhau cần rất nhiều bộ hub, switch. Tuy nhiên thực tế số lượng máy tính trong một LAN thường không nhiều. Mạng được kết nối cùng một switch thường có một broadcast domain
+### Với mạng LAN thông thường, các máy tính trong cùng một địa điểm có thể được kết nối với nhau thành một mạng LAN, chỉ sử dụng một thiết bị tập trung như hub hoặc switch. Có nhiều mạng LAN khác nhau cần rất nhiều bộ hub, switch. Tuy nhiên thực tế số lượng máy tính trong một LAN thường không nhiều. Mạng được kết nối cùng một switch thường có một broadcast domain
 # VLAN ( Virtual LAN) 
 - là 1 cách để chia switch thành nhiều mạng LAN khác. Việc tạo lập nhiều mạng VLAN trong cùng một mạng LAN sẽ chia switch thành những broadcast domains nhỏ hơn nó sẽ tương với mạng con (subnet)(* Thông thường thì router sẽ đóng vai trò tạo broadcast domain.*) thuận lợi cho việc quản lý một mạng cục bộ rộng và tránh tốn tài nguyên số lượng hub, switch và lãng phí số lượng port Ethernet.
 ![](VLAN.jpg)
@@ -14,7 +14,7 @@ Chạy từ 0 tới 4095:  riêng VLAN 0 và 4095 là không dùng
    * 1006 – 4094: dải VLAN mở rộng, sử dụng khi switch hoạt động ở mode Transparent.
 
         ![Transparent Mode](https://www.anphat.vn/images/anphat/HD_Cau_hinh_tinh_nang/DrayTek/Q_Cac_bai_viet_cu_hon/Transparent_mode/Transparent_mode1.gif)
-   * Các VLAN mặc định sau không được sửa xóa: VLAN 1 là default, 1002 tới 1005. Ban đầu tất cả các cổng của Switch cisco mặc định là VLAN 1. 
+   * Các VLAN mặc định sau không được sửa xóa: VLAN 1 là default, 1002 tới 1005. Ban đầu tất cả các cổng của Switch cisco mặc định là VLAN 1
    
 
 

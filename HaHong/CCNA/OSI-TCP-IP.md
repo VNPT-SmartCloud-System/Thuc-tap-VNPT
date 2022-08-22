@@ -1,7 +1,7 @@
 
 # OSI Model (Open Systems Interconnection)
 Nhằm tạo ra chuẩn giao tiếp chung khi tích hợp nhiều nhà cùng cấp. Mô hình OSI bao gồm 7 tầng. Mỗi tầng đều có đặc tính là chỉ sử dụng chức năng của tầng dưới nó và chức năng của mình.
-*7 tầng  của OSI có 3 tầng dưới được thực hiện trên kênh truyền( định nghĩa thiết bị phần cứng cho kết nối); 4 tầng trên thực hiện trên các host( giao tiếp người dùng)*
+* 7 tầng  của OSI có 3 tầng dưới được thực hiện trên kênh truyền( định nghĩa thiết bị phần cứng cho kết nối); 4 tầng trên thực hiện trên các host( giao tiếp người dùng) *
 
 ![Mô hình OSI](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/OSI_Model_v1.svg/800px-OSI_Model_v1.svg.png)
 
