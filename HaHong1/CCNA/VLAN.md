@@ -1,7 +1,8 @@
 Với mạng LAN thông thường, các máy tính trong cùng một địa điểm có thể được kết nối với nhau thành một mạng LAN, chỉ sử dụng một thiết bị tập trung như hub hoặc switch. Có nhiều mạng LAN khác nhau cần rất nhiều bộ hub, switch. Tuy nhiên thực tế số lượng máy tính trong một LAN thường không nhiều. Mạng được kết nối cùng một switch thường có một broadcast domain
 # VLAN ( Virtual LAN) 
 - là 1 cách để chia switch thành nhiều mạng LAN khác. Việc tạo lập nhiều mạng VLAN trong cùng một mạng LAN sẽ chia switch thành những broadcast domains nhỏ hơn nó sẽ tương với mạng con (subnet)(* Thông thường thì router sẽ đóng vai trò tạo broadcast domain.*) thuận lợi cho việc quản lý một mạng cục bộ rộng và tránh tốn tài nguyên số lượng hub, switch và lãng phí số lượng port Ethernet.
-![](VLAN.jpg)
+![](https://st.quantrimang.com/photos/Image/012006/09/vlan.jpg)
+
 ## Có ba loại VLAN, bao gồm:
 
 * VLAN dựa trên cổng (port based VLAN): Mỗi cổng (Ethernet hoặc Fast Ethernet) được gắn với một VLAN xác định. Do đó mỗi máy tính/thiết bị host kết nối với một cổng của switch đều thuộc một VLAN nào đó. Đây là cách cấu hình VLAN đơn giản và phổ biến nhất.
@@ -18,7 +19,7 @@ Chạy từ 0 tới 4095:  riêng VLAN 0 và 4095 là không dùng
    
 
 
-## Các chế độ VLAN
+## Các mode VLAN
 - Trunking mode (chế độ trung kế): là một kết nối vật lý và logic để hỗ trợ các VLAN trên các Switch liên kết với nhau.
  ![](https://vnpro.vn/wp-content/uploads/2015/08/trunk.jpg)
  
