@@ -36,7 +36,7 @@ Mô hình TCP/IP có các chức năng tương đương với mô hình OSI như
     - Quy định đánh điạ chỉ và điều khiển truy nhập kênh cho các thiết bị mạng
  - LLC( Logiccal Link Control):giao tiếp giữa phần mềm mạng ở các lớp trên và phần cứng thiết bị ở các lớp dưới.
     - Ghép kênh
-    - Điều khiển luồng
+    - Điều khiển luồng.
 => Lớp con LCC tạo ra tính năng linh hoạt trong việc phục vụ cho các giao thức lớp mạng trên nó, trong khi vẫn liên lạc hiệu quả với các kỹ thuật khác nhau bên dưới nó. LLC với vai trò là lớp phụ tham gia vào quá trình đóng gói. LLC nhận đơn vị dữ liệu giao thức lớp mạng, như là các gói IP, và thêm nhiều thông tin điều khiển vào để giúp phân phối gói IP đến đích của nó. Nó đóng gói trở lại dạng IP, sau đó chuyển xuống lớp phụ MAC để tiến hành các kỹ thuật đặc biệt được yêu cầu cho đóng gói tiếp theo. 
 2. Internet Layer (Packets)
  - Nhiệm vụ của tầng mạng trên mô hình TCP/IP là giải quyết vấn đề các gói tin qua các mạng để đến đúng đích mong muốn
