@@ -1,5 +1,5 @@
 # Địa chỉ IP 
-Do địa chỉ MAC không có cấu trúc nên không thể sử dụng để định tuyến  phải tạo ra một spanning tree. Việc kết nối các mạng vật lý: cấu trúc vật lý khác nhau và cách đánh địa chỉ khác nhau cực kỳ phức tạp
+Do địa chỉ MAC không có cấu trúc nên không thể sử dụng để định tuyến  phải tạo ra một spanning tree. Việc kết nối các mạng vật lý: cấu trúc vật lý khác nhau và cách đánh địa chỉ khác nhau cực kỳ phức tạp
 * Cần phải có một phân lớp chung độc lập với các mạng vật lý, kết nối mạng lớp Internetworking tạo thành mạng Internet
 ## Địa chỉ IP dùng để làm gì?
 * Interface trên host và router đều có thể gửi và nhận IP datagram, nên mỗi giao diện phải có một IP address IP Address có tính duy nhất!
@@ -18,10 +18,10 @@ Do địa chỉ MAC không có cấu trúc nên không thể sử dụng để �
   * Địa chỉ dùng để che phần host ID của địa chỉ IP  để xác định network ID
 * Private: Có 3 dải mạng dành cho private, sẽ không được định tuyến trên internet, có thể dùng đi dùng lại được
 ![Private](https://3.bp.blogspot.com/-tqXXjldaJSs/V1ECAxQxmmI/AAAAAAAAAfI/qHUIvZG30mMGLcsNAB16dn7OeMk-sGYpACLcB/s1600/Capture.PNG)
-Public: Ngoài 3 dải mạng trên sẽ đi được trên internet
-Chuyển đổi địa chỉ Private-> Public bằng NAT(Network Access Translation)
+* Public: Ngoài 3 dải mạng trên sẽ đi được trên internet
+* Chuyển đổi địa chỉ Private-> Public bằng NAT(Network Access Translation)
 ## Các lớp địa chỉ IP
-* Địa chỉ IP là một dải nhị phân dài 32 bit và chia thành 4 bộ 8 bit gọi là các Octet, gồm phần network address dùng để xác định mạng mà thiết bị kết nối vào và phần host-address để xác định thiết bị của mạng đó.   
+* Địa chỉ IPv4 là một dải nhị phân dài 32 bit và chia thành 4 bộ 8 bit gọi là các Octet, gồm phần network address dùng để xác định mạng mà thiết bị kết nối vào và phần host-address để xác định thiết bị của mạng đó.   
 * Địa chỉ IP được chia làm 5 lớp, ký hiệu là A, B, C, D và E.
 ![](https://techhub.hpe.com/eginfolib/networking/docs/switches/5130ei/5200-3942_l3-ip-svcs_cg/content/images/image8.png) 
 
@@ -66,7 +66,7 @@ Trong địa chỉ lớp A, byte đầu tiên được dùng để định nghĩ
 - VD:
   * IP class C: 203.160.9.0 và subnet mask: 255.255.255.0 (địa chỉ mạng 24 bits)
 – Chia thành 4 mạng con lấy thêm 2 bít cho địa chỉ mạng (26 bits)
-* Địa chỉ mạng 1: 203.160.9.0
-* Địa chỉ mạng 2: 203.160.9.64
-* Địa chỉ mạng 3: 203.160.9.128
-* Địa chỉ mạng 4: 203.160.9.192
+* Địa chỉ mạng 1: 203.160.9.0   
+* Địa chỉ mạng 2: 203.160.9.64  
+* Địa chỉ mạng 3: 203.160.9.128 
+* Địa chỉ mạng 4: 203.160.9.192  
