@@ -53,8 +53,9 @@ VD:
 đường qua cổng f0/2 sẽ là đường phụ
 
 # Các giao thức định tuyến 
-- Các giao thức định tuyến cũng có thể được phân loại thành Giao thức cổng bên trong (IGP) hoặc Giao thức cổng bên ngoài (EGP). IGP là các giao thức định tuyến trao đổi thông tin định tuyến với các bộ định tuyến khác trong một hệ thống tự trị duy nhất (AS). Một AS được định nghĩa là một mạng hoặc một tập hợp các mạng dưới sự kiểm soát của một doanh nghiệp. 
-- Hoặc cũng có thể được phân loại vectơ khoảng cách (distance vector) và giao thức định tuyến trạng thái liên kết (link-state)
+![](https://www.computernetworkingnotes.org/images/cisco/ccna-study-guide/csg127-02-differences-between-igp-and-bgp.png)
+- Các giao thức định tuyến có thể được phân loại thành Giao thức cổng bên trong (IGP) hoặc Giao thức cổng bên ngoài (EGP). IGP là các giao thức định tuyến trao đổi thông tin định tuyến với các bộ định tuyến khác trong một hệ thống tự trị duy nhất (AS). Một AS được định nghĩa là một mạng hoặc một tập hợp các mạng dưới sự kiểm soát của một doanh nghiệp. 
+- IGP phân loại vectơ khoảng cách (distance vector) và giao thức định tuyến trạng thái liên kết (link-state)
    - Vecto routing protocol: các router trao đổi các thông tin về địa chỉ của các router khác mà chúng có thể gửi data tới được với các router kết nối trực tiếp với nó.
    - Link-state routing protocol: các router trao đổi với nhau về thông tin của topo mạng. Thông tin topo mạng này sẽ được dùng để tính toán đường dẫn tốt nhất qua AS từ điểm nguồn đến điểm đích.
 ## Mỗi thứ sau đây được phân loại là IGP:
@@ -130,12 +131,60 @@ VD: ![](https://itforvn.com/wp-content/uploads/2018/03/H2.-B%E1%BA%A3ng-%C4%91%E
 ### Hệ thống trung gian đến hệ thống trung gian (IS-IS) ### Giao thức định tuyến cổng nội bộ nâng cao (EIGRP)
 - EIGRP(Enhanced Interior Gateway Routing Protocol) là một giao giao thức định tuyến do Cisco phát triển, chỉ chạy trên các sản phẩm của Cisco. Đây là điểm khác biệt của EIGRP so với các giao thức đã được đề cập ở trên. Các giao thức RIP và OSPF là các giao thức chuẩn, có thể chạy trên các router của nhiều hãng khác nhau.
 -EIGRP là một giao thức dạng Distance- vector được cải thiện,nó không sử dụng thuật toán Bell man-Ford mà sử dụng thuật toán riêng DUAL, và kế thừa một số cấu trúc của OSPF như: xây dựng quan hệ láng giềng, bảng topology và bảng định tuyến
-- EIGRP sử dụng một số công thức tính metric rất phức tạp dựa trên 
-## Các giao thức EGP bao gồm:
-### Giao thức cổng biên (BGP)
-### Giao thức cổng ngoài (EGP)
-### Giao thức định tuyến liên miền ISO (IDRP)
+- Đặc điểm nổi bật của EIGRP: 
+   - Không gửi cập nhật theo định kỳ mà chỉ gửi toàn bộ bảng định tuyến cho láng giềng cho lần dầu tiên thiết lập mối quan hệ láng giềng, sau đó chỉ gửi cập nhật khi có sự thay đổi => tiết kiệm tài nguyên mạng
+- Hoạt động lựa chọn đường đi của EIGRP thiết lập quan hệ láng giềng:
+  -Khi bật EIGRP trên một cổng, router sẽ gửi các gói tin HELLO ra khỏi cổng để thiết lập quan hệ láng giềng với router kết nối trực tiếp với mình. Các gói tin HELLO được gửi đến địa chỉ multicast dành riêng cho EIGRP là 224.0.0.10 với giá trị HELLO –timer với chu kỳ là 5s.
 
+Để thiết lập mối quan hệ láng giềng giữa 2 router, một số thông số được trao đổi qua các gói tin HELLO phải khớp với nhau giữa 2 router, một số thông số đc trao đổi qua các gói tin HELLO phải khớp với nhau giữa 2 router, các thông số này bao gồm:
+
+Giá trị AS được cấu hình trên mỗi router.
+Các địa chỉ đấu nối giữa 2 router phải cùng subnet.
+Thảo mãn điều kiện xác thực
+Cùng tham số K.
+- Giá trị AS – Autonomous System:Khi cấu hình EIGRP trên router, người quản trị phải khai báo AS mà router này thuộc về. Giá trị này buộc phải khớp nhau giữa 2 router kết nối trực tiếp với nhau để các router này có thể thiết lập mối quan hệ láng giềng.
+
+- Các địa chỉ đầu nối:Để 2 router thiết lập được quan hệ láng giềng với nhau, hai địa chỉ đầu nối giữa 2 router phải cùng subnet.
+
+- Thỏa mãn các điều kiện xác thực:Như các giao thức khác, để tang cường tính an ninh trong hoạt động trao đổi thông tin định tuyến,trên router có thể thực hiện cấu hình password để xác thực thông tin định tuyến nhận được từ các router khác. Hai router nếu có cấu hình xác thực thì phải thống nhất với nhau về password đã cấu hình thì mới có thể thiết lập quan hệ láng giềng với nhau.
+
+- Cùng bộ tham số K:EIGRP sử dụng một loại công thức tính metric phức tạp, là một hàm của bốn biến số: bandwidth, delay, load, reliability:Metric = f (bandwidth, delay, load, reliability)Các biến số này có thể được gắn với các trọng số để tang hoặc giảm bớt ảnh hưởng của chúng gọi là các tham số K gồm 5 giá trị K1, K2, K3, K4, K5. Các router chạy EIGRP bắt buộc phải thống nhất với nhau về bộ tham số K được sử dụng để có thể thiết lập quan hệ láng giềng với nhau.Việc lựa chọn đường đi tốt nhất của EIGRP có chút khác biệt với các giao thức khát. 
+- EIGRP sử dụng RTP để trao đổi gói tin với các bộ định tuyến nói EIGRP khác
+- EIGRP sử dụng năm loại gói tin. Các loại này là Cập nhật, Truy vấn, Trả lời, Xin chào và Xác nhận. Hãy thảo luận về những loại này.
+
+ - Cập nhật:
+
+Một gói Cập nhật chứa thông tin cập nhật định tuyến hoặc tuyến đường. Khi hai bộ định tuyến EIGRP xây dựng mối quan hệ láng giềng, chúng sử dụng các gói cập nhật để trao đổi thông tin định tuyến. Sau khi xây dựng mối quan hệ láng giềng, họ chỉ sử dụng các gói cập nhật để trao đổi thông tin về một thay đổi.
+
+EIGRP luôn sử dụng multicast hoặc unicast đáng tin cậy để gửi đến gói cập nhật. EIGRP sử dụng multicast để gửi cùng một thông tin đến tất cả các láng giềng và một unicast để chỉ gửi thông tin cho một láng giềng cụ thể.
+
+Bất kể phương thức nào EIGRP sử dụng để gửi một gói cập nhật, EIGRP luôn yêu cầu một xác nhận cho mỗi gói cập nhật.
+
+   - Query:
+
+EIGRP sử dụng một gói truy vấn để tìm một đường dẫn thay thế đến một đích cụ thể khi nó bị mất đường dẫn đến đích. EIGRP luôn sử dụng phương thức phát đa hướng đáng tin cậy để gửi các gói truy vấn và yêu cầu xác nhận cho mỗi gói truy vấn.
+
+  - Reply
+
+EIGRP sử dụng một gói trả lời để trả lời một gói truy vấn. EIGRP sử dụng phương pháp unicast đáng tin cậy để gửi một gói tin trả lời. Một gói tin trả lời bao gồm thông tin về một tuyến đường cụ thể hoặc một thông báo cho biết rằng không có tuyến đường cụ thể nào được biết đến. EIGRP cũng cần xác nhận cho một gói trả lời.
+
+  - Hello
+
+EIGRP sử dụng gói hello để khám phá các hàng xóm tiềm năng của EIGRP. EIGRP gửi các gói hello qua phương thức multicast không đáng tin cậy. Nó không cần xác nhận cho một gói hello.
+
+  - Ack
+
+EIGRP gửi một gói ack để phản hồi lại một gói cập nhật, truy vấn hoặc trả lời. Một gói ack xác nhận rằng thiết bị đích đã nhận được gói. Các gói Ack luôn được gửi qua unicast và không bao giờ yêu cầu xác nhận. Bản thân một gói tin ack được gửi dưới dạng xác nhận. Một xác nhận cho một gói thông báo không có ý nghĩa gì.
+## Các giao thức EGP bao gồm:
+### Giao thức cổng biên (BGP) (Border Gateway Protocol)
+Nó cho phép giao tiếp và trao đổi thông tin định tuyến trên Internet và các hệ thống tự trị, cũng như kết nối hoặc liên lạc giữa các nhà cung cấp dịch vụ Internet (ISP) hoặc với biên giới bên ngoài của mạng doanh nghiệp.
+![](https://vnpro.vn/upload/images/Th%C6%B0%20vi%E1%BB%87n/c12-02.PNG)
+-  BGP là giao thức định tuyến Path Vector.
+- Định tuyến không dựa trên metric mà chọn đường theo attribute( thuộc tính)(Thuộc tính AS_PATH sẽ liệt kê đường dẫn, được định nghĩa là một chuỗi các số hiệu mạng mà một gói tin phải trải qua để đến một mạng đích nào đó)
+- BGP sử dụng TCP port 179 cho việc trao đổi thông tin.
+- Trong BGP, chúng ta có 2 loại peers. Quan hệ giữa 2 BGP speaker trong cùng 1 AS gọi là iBGP peer (Internal BGP). Trái lại, quan hệ giữa 2 BGP speaker ở khác AS gọi eBGP. Trong cùng một AS, các BGP speaker có thể thiết lập quan hệ neighbor mà KHÔNG NHẤT THIẾT phải kết nối trực tiếp với nhau, sơ đồ kết nối vật lý thường có ít nhất hai tuyến giữa từng cặp router. Nếu router chạy BGP dùng địa chỉ cổng cho kết nối TCP và nếu cổng đó bị hỏng, vẫn còn một tuyến đường giữa hai route.Với ác BGP speaker ở các AS khác nhau, khi thiết lập quan hệ neighbor, điều đầu tiên BGP speaker kiểm tra là chúng có kết nối trực tiếp với nhau không? Nếu không các bạn phải dùng đến yếu tố ebgp-multihop x với x là số hop để đến được neighbor của mình, nếu không định nghĩa BGP speaker sẽ set là 255
+- Một BGp speaker (router biên) sẽ chia sẻ thông tin network với các neighbor BGP speaker.  Thông tin network đó bao gồm tất cả các AS khác mà nó có. Thông tin này sẽ được BGP speaker sử dụng để tạo một biểu đồ, hoặc cây từ tất cả các AS vừa nhận được. Biểu đồ đó sẽ giúp BGP bỏ sự lặp tuyến (routing loops) và thiết lập các chính sách nhất định cho các AS.
+- Các BGP speaker có bảng định tuyến riêng dành cho BGP, khác với IGP là chung 1 bảng định tuyến. 
 
 
 [Định tuyến](https://vnnet.edu.vn/951-2/)
