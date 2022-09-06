@@ -133,8 +133,22 @@ Router (config-if) # ip nat outside
 
 >R#debug ip nat
 
+ ### SNAT, DNAT
+|  | SNAT | DNAT| 
+| :----- | :---------- | :-------------- | 
+| Viết tắt    | Source NAT        | Destination NAT         | 
+| Sử dụng | Được dùng bởi người dùng nội bộ, sử dụng khi ai đó muốn từ mạng cục bộ truy cập vào Internet   |Sử dụng khi cần chuyển hướng các gói đến có đích là địa chỉ/ cổng public đến địa chỉ / cổng IP private bên trong mạng                | 
+| Thay đổi địa chỉ|SNAT thay đổi địa chỉ nguồn của gói đi qua thiết bị NAT. | DNAT thay đổi địa chỉ đích của gói đi qua Router.  | 
+| Thứ tự hoạt động| Sau khi quyết định định tuyến được thực hiện.  | Trước khi xác định việc định tuyến.              |
+|Giao tiếp      | SNAT cho phép nhiều máy chủ nội bộ nhận được từ bất kì máy chủ bên ngoài | DNAT cho phép một vài máy chủ bên ngoài lấy bất kì máy chủ bên trong  | 
+| Thay đổi   |IP private chuyển sang IP public| IP public chuyển sang IP private              |
+
 Tổng kết:
 -  Giao thức NAT dùng để chuyển đổi địa chỉ IP private sang IP public. Static NAT được sử dụng để ánh xạ địa chỉ theo kiểu “one-to-one” và được chỉ định bởi người quản trị. Dynamic NAT là kiểu chuyển dịch địa chỉ dạng “one-to-one” một cách tự động. NAT Overload là kiểu chuyển dịch địa chỉ dạng “many-to-one” một cách tự động, sử dụng các chỉ số cổng (port) để phân biệt cho từng chuyển dịch.
 ##### Chú ý: Ở phần cấu hình PAT có nhắc đến cài đặt ACL(Access Control List)
 ACL (Access control list) hay còn gọi là access lists, là một danh sách tuần tự các câu lệnh được áp dụng trên một Interface nào đó, và trên bộ đệm vào hoặc ra, điều khiểu Router từ chối hoặc chuyển tiếp các gói tin dựa vào thông tin trong IP header hoặc TCP/UDP header. Có 2 chức năng chính là phân loại lưu lượng và lọc dữ liệu.
 - Ứng dụng trong công nghệ NAT lọc ra các IP, địa chỉ mạng nào được cho phép truy cập ra mạng Internet
+ Tham Khảo:
+
+[NAT](https://www.totolink.vn/article/90-3-loai-nat-network-address-translation-ban-can-biet.html)
+ [SNAT, DNAT](https://www.tutorialspoint.com/what-is-the-difference-between-snat-and-dnat#:~:text=SNAT%20transforms%20the%20source%20address,the%20routing%20decision%20is%20built.)
