@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ### Đặt vấn đề 
 - Trong mạng gia đình hoặc mạng doanh nghiệp, các thiết bị có cùng dải địa chỉ mạng được kết nôi với nhau bằng thiết bị trung gian như Switch, Hub. Chúng cung cấp kết nối giữa các máy trạm trên mạng cục bộ. Các máy trạm cục bộ có thể kết nối với nhau và chia sẻ thông tin mà không cần thêm bất kỳ thiết bị nào. Nếu một máy chủ đang gửi một gói đến một thiết bị được cấu hình với cùng một dải mạng IP với nó, thì gói đó chỉ được chuyển tiếp ra khỏi giao diện máy chủ, thông qua thiết bị trung gian và trực tiếp đến thiết bị đích.
 - Tuy nhiên, chúng ta muốn thiết bị của mình có thể kết nối ngoài phân đoạn mạng cục bộ, các thiết bị nằm ngoài phân đoạn mạng cục bộ được gọi là máy chủ từ xa. Khi một thiết bị nguồn gửi một gói tin đến một thiết bị đích từ xa, khi đó cần sự trợ giúp của các bộ định tuyến và định tuyến. 
@@ -53,6 +52,19 @@ VD:
 - R1(config)# ip route 172.17.0.0 255.255.0.0 f0/2 10 
 đường qua cổng f0/2 sẽ là đường phụ
 
+# Các giao thức định tuyến 
+![](https://www.computernetworkingnotes.org/images/cisco/ccna-study-guide/csg127-02-differences-between-igp-and-bgp.png)
+- Các giao thức định tuyến có thể được phân loại thành Giao thức cổng bên trong (IGP) hoặc Giao thức cổng bên ngoài (EGP). IGP là các giao thức định tuyến trao đổi thông tin định tuyến với các bộ định tuyến khác trong một hệ thống tự trị duy nhất (AS). Một AS được định nghĩa là một mạng hoặc một tập hợp các mạng dưới sự kiểm soát của một doanh nghiệp. 
+- IGP phân loại vectơ khoảng cách (distance vector) và giao thức định tuyến trạng thái liên kết (link-state)
+   - Vecto routing protocol: các router trao đổi các thông tin về địa chỉ của các router khác mà chúng có thể gửi data tới được với các router kết nối trực tiếp với nó.
+   - Link-state routing protocol: các router trao đổi với nhau về thông tin của topo mạng. Thông tin topo mạng này sẽ được dùng để tính toán đường dẫn tốt nhất qua AS từ điểm nguồn đến điểm đích.
+## Mỗi thứ sau đây được phân loại là IGP:
+### Giao thức định tuyến thông tin RIP(Routing information protocol)
+- Giao thức định tuyến bên trong mạng tự trị
+- SỬ dụng thuật toán tìm đường distance-vector, mỗi rouer sẽ thường xuyên cập nhật bảng định tuyến của nó sang hàng xóm theo định kì 30s/lần, thông tin này lại tiếp tục được hàng xóm lan truyền tiếp đến các láng giềng khác và cứ thế lan truyền ra mọi router toàn mạng ; khi có bảng định tuyến nó sẽ cập nhật đường đi tốt hơn dựa vào thuật toán Bellman-Ford 
+- Chọn đường đi theo metric cố định : số nút mạng đi qua( hop count), giới hạn metric tối đa là 15, giá trị 16 được gọi là infiniy metric
+- RIP sử dụng UDP để chuyển các gói tin
+- Có thể bị loop trên mạng khi gặp sự cố down mạng
 
 [Nguồn tham khảo](https://vnnet.edu.vn/951-2/)
 =======
@@ -124,6 +136,7 @@ VD:
 - RIP sử dụng UDP để chuyển các gói tin
 - Có thể bị loop trên mạng khi gặp sự cố down mạng
 
+=======
 VD: ![](https://itforvn.com/wp-content/uploads/2018/03/H2.-B%E1%BA%A3ng-%C4%91%E1%BB%8Bnh-tuy%E1%BA%BFn-c%E1%BB%A7a-c%C3%A1c-Router.jpg)
 - Giả sử R1 sẽ gửi cho R2 thông tin bằng định tuyến của mình, khi đó R2 sẽ cập nhật thông tin dải địa chỉ mạng mà nó chưa có trong bảng định tuyến khi đó metric sẽ tăng lên 1. 
 - Sau đó R2 sẽ gửi cho R3 thông tin bảng định tuyến mà R2 đã cập nhật, sau đó R3 sẽ cập nhật thông tin những dải địa chỉ mà nó chưa có trong bảng định tuyến và cập nhật metric.
@@ -250,4 +263,7 @@ Nó cho phép giao tiếp và trao đổi thông tin định tuyến trên Inter
 [RIP](https://itforvn.com/bai-12-giao-thuc-dinh-tuyen-rip.html/)
 [OSPF](https://itforvn.com/bai-12-giao-thuc-dinh-tuyen-rip.html/)
 [EIGRP](https://vnnet.edu.vn/giao-thuc-dinh-tuyen-eigrp-enhanced-interior-gateway-routing-protocol/)
->>>>>>> e78ff55194d3607bda30252a41a118886c45a1fa
+
+=======
+[EIGRP](https://vnnet.edu.vn/giao-thuc-dinh-tuyen-eigrp-enhanced-interior-gateway-routing-protocol/)
+
