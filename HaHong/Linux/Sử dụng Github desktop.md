@@ -1,0 +1,42 @@
+
+Nguyên tắc hoạt động
+Để làm việc với Github bạn cần:
+Đăng ký một tài khoản GitHub và tạo một Repository( GitHub Repository)
+Cài đặt Github Desktop, một công cụ để quản lý Local Repository(Kho chứa dữ liệu địa phương)
+Cấu hình để có thể đồng bộ hóa dữ liệu bằng Githyb desktop lên Repository server
+![](https://s1.o7planning.com/vi/10283/images/70882.png)
+1.Cách tạo GitHub Repository
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git1.png)
+Rồi chọn Creat repository
+Sau đó vào Github desktop lựa chọn Repository vừa tạo trên Github rồi clone về Github desktop như hình
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git2.png)
+Trở lại vói file dữ liệu lưu trữ và thêm vào các file bạn muốn
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git3.png)
+Ngay lập tức trên Github desktop sẽ hiện lên những thay đổi Local Repository
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git4.png)
+Nhập thông tin ghi chú (Comment) và nhấn Commit dữ liệu.
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git5.png)
+Push lên Repository server:
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git6.png)
+các file dữ liệu đã được đẩy lên Github 
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git7.png)
+2. Cách xóa một Repository
+Để xóa một Repository bạn cần truy cập vào mục Settings của nó.
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git8.png)
+-Tiếp theo, cuộn xuống dưới cùng của trang và bạn sẽ nhìn thấy các chức năng nguy hiểm, chúng bao gồm:
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git9.png)
+ 1. Thay đổi tính hiển thị (visibility) của repository (Từ Public sang Private hoặc ngược lại).
+ 2. Chuyển quyền sở hữu repository này cho một người khác,
+3. Đánh dấu repository này được lưu trữ và chỉ có thể xem (readonly), không thể thay đổi.
+4. Xóa repository.
+=> Chọn delete repository  =)))
+# 3. Cách pull request
+
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git12.png)
+Đẩy thư mục lên như trên sau đó chọn View on Github
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git13.png)
+Ở github của bạn đã có sự thay đổi tuy nhiên cần phải click pull request 
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git14.png)
+Chọn create a pull request
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/git15.png)
+
