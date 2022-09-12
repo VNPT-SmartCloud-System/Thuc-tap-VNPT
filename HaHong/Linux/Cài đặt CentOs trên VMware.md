@@ -1,7 +1,8 @@
-Cài đặt CentOs trên VMware
+# Cài đặt CentOs trên VMware.
 
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/2.png)
-Sau khi tải và cài đặt xong VMware sẽ có giao diện giống hình sau, bắt đầu tạo một máy ảo
+Sau khi tải và cài đặt xong VMware sẽ có giao diện giống hình tren, bắt đầu tạo một máy ảo
+
 Chọn Typical-> Next
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/3.png)
 Chọn install the operating system later-> Next
@@ -13,7 +14,7 @@ Chọn hệ điều hành linux với CentOS 7 -> Next
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/7.png)
 Chọn Customize Hardware để cấu hình cho máy ảo 
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/8.png)
-Chọn RAM, processors và core cho máy ảo (chọn theo cấu hình máy). Dẫn file CentOs 7 iso bạn tải vào đường Dẫn
+Chọn RAM, processors và core cho máy ảo (chọn theo cấu hình máy ban). Dẫn file CentOs 7 iso bạn tải vào đường dẫn iso
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/9.png)
 Sau đó chọn Power on this virtual machine
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/10.png)
@@ -30,9 +31,9 @@ Software selection -> Server with GUI
 - Network & Hostname => on
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/15.png)
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/16.png)
+- Sau đó đặt mật khẩu root 
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/17.png)
-
-- Sau đó đặt mật khẩu root -> Đồng ý với license 
+-> Đồng ý với license 
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/18.png)
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/19.png)
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/20.png)
