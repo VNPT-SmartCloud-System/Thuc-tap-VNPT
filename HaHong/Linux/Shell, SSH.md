@@ -89,20 +89,65 @@ cat /etc/shells
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux1.png)
 
 ## 2. Giao thuc SSH
-- Secure Shell (SSH) là một giao thức mạng dùng để thiết lập kết nối mạng một cách bảo mật. Port mặc định đuợc sử dụng bởi SSH là 22. SSH tạo ra một kênh kết nối được mã hóa an toàn từ một mạng không an toàn nhu Telnet( Giao thức này trao đổi dữ liệu, mật khẩu dưới dạng plaintext, khiến chúng rất dễ bị phân tích và đánh cắp).Điểm đặc biệt của SSH là giao thức này sử dụng các thuật toán mã hóa bất đối xứng, đối xứng và hashing để đảm bảo tính bảo mật và toàn vẹn của dữ liệu được trao đổi từ client tới server và ngược lại.
+- Secure Shell (SSH) là một giao thức mạng dùng để thiết lập kết nối từ xa  mạng một cách bảo mật. Port mặc định đuợc sử dụng bởi SSH là 22. SSH tạo ra một kênh kết nối được mã hóa an toàn từ một mạng không an toàn nhu Telnet( Giao thức này trao đổi dữ liệu, mật khẩu dưới dạng plaintext, khiến chúng rất dễ bị phân tích và đánh cắp).Điểm đặc biệt của SSH là giao thức này sử dụng các thuật toán mã hóa bất đối xứng, đối xứng và hashing để đảm bảo tính bảo mật và toàn vẹn của dữ liệu được trao đổi từ client tới server và ngược lại.
 - SSH có nhiều cách để xác thực một người dùng, nhưng hai cách thông dụng nhất vẫn là xác thực dựa trên mật khẩu và xác thực public-key.
    - Xác thực dựa trên mật khẩu đơn giản là bạn chỉ việc sử dụng mật khẩu của user bạn tạo để truy cập, server sẽ lưu chúng, và đối chiếu với mật khẩu của bạn khi đăng nhập. Cách này thì không đủ an toàn do bạn có khả năng bị đánh cắp mật khẩu.
    - Cách này sử dụng một cặp khóa – public-key và private-key – được tạo ra dựa trên thuật toán mã hóa public-key. 
-### 2.1. Cau lenh
-- Sử dụng SSH để login với password
-Trên máy local của bạn:
-> ssh your-username@host
+Dịch vụ SSH thường cung cấp dịch vụ thông qua cổng mặc định 22 va mỗi server Linux có tài khoản root va , dựa trên những thông tin đó, người tấn công sẽ có thể đăng nhập tài khoản root bằng cách đoán mật khẩu, nếu password không đủ để phức tạp và không có thêm những phương pháp bảo mật thì sẽ bị liên kết.
+Có các phương pháp bảo vệ máy chủ trước những tấn công này:
+- Vô hiệu hóa tài khoản root
+- Vô hiệu hóa mật khẩu đăng nhập
+- Thay đổi port SSH server thay vì dùng port 22 mặc định
+- Chỉ cho phép người dùng cụ thể đặng nhập SSH.
+Cần cài đặt SSH trên linux: yum install openssh-server
+### 2.1 Giới hạn tài khoản root truy cập
+Thực tế là các máy chủ SSH theo mặc định có đăng nhập gốc được bật là vấn đề bảo mật lớn nhất. Vô hiệu hóa đăng nhập root :
+- Bạn chỉ cần sửa đổi tham số PermitRootLogin trong /etc/ssh/sshd_config khởi động lại dịch vụ systemctl restart servicename dịch vụ sẽ nhận cấu hình mới.
+- Sau khi vô hiệu hóa đăng nhập root, bạn phải chỉ định tên người dùng bạn muốn sử dụng để đăng nhập bằng cách sử dụng ssh user@servername hoặc ssh -l user servername. 
+### 2.2 Thay doi cau hinh port
+ Để có SSH nghe trên một cổng khác, bạn phải thay đổi cổng 22 thành một thứ khác. 
+ Trước khi đổi port SSH, để đảm bảo bạn có thể kết nối lại mà không cần nhờ tới sự hỗ trợ của nhà cung cấp dịch vụ thì làm như sau:
 
-host ở đây có thể là địa chỉ ip hoặc domain name của máy mà bạn truy cập tới. Sau đó nhập mật khẩu tương ứng với user của bạn ở host đó.
+- Nếu Centos 7 đang sử dụng UFW:
+  #ufw allow 2222/tcp
+- Mặc định FirewallD:
+ #firewall-cmd --permanent --zone=public --add-port=2222/tcp
+ #firewall-cmd --reload
 
-- Tạo cặp khóa
-Câu lệnh để tạo ra một cặp khóa xác thực SSH.
-Câu lệnh đơn giản nhất, trên máy local:
+Bước 1: vài file config
+Bắt đầu bằng cách mở /etc/ssh/sshd_config 
+> vi /etc/ssh/sshd_config
 
-ssh-keygen
+Bước 2: đổi từ cổng 22 sang 2222( Port muổn đổi không được trùng với port của một service nào nhé.)
+Tìm #Port 22 . Chúng tôi sẽ cần bỏ ghi chú dòng này và thay đổi số thành số cổng mong muốn. Ví dụ chuyển số cổng thành 2222
+Từ: #Port 22 
+Đến: Port 2222
+Sau khi thay đổi cổng SSH, bạn cũng cần định cấu hình Selinux để cho phép thay đổi này. Các cổng mạng được dán nhãn với các nhãn bảo mật SELinux để ngăn các dịch vụ truy cập các cổng nơi chúng không nên đi
+ #semanage port -a -t ssh_port_t -p tcp 2222
+Bước 3
+Lưu các thay đổi bạn đã thực hiện đối với tệp này và thoát.
+> systemctl restart sshd
+
+Bước 4 test user login thành công qua port 2222
+Để đảm bảo mọi thứ đang hoạt động, bạn có thể thử SSH trên cổng mới. Bạn sẽ cần sử dụng -p tùy chọn để hướng dẫn khách hàng sử dụng một số cổng khác với cổng mặc định 22.
+>ssh user@localhost -p 2222
+### 2.3 Giới hạn User SSH login
+Nhiều tùy chọn cho SSHD có thể được tìm thấy qua tệp sshd_config. Một trong những tùy chọn thú vị nhất để sử dụng là AllowUsers. Tùy chọn này đặt ra một danh sách được của tất cả người dùng sẽ được phép đăng nhập thông qua SSH (giới hạn đăng nhập chỉ cho những người dùng này). 
+- Tùy chọn AllowUsers trong tệp mặc định/etc/ssh/sshd_config. 
+- Tùy chọn AllowUsers là một tùy chọn tốt hơn so với Permitrootlogin vì nó hạn chế hơn là chỉ từ chối root để đăng nhập. 
+- Nếu tùy chọn AllowUsers không chỉ định Root, bạn vẫn có thể truy cập root bằng cách sử dụng su - sau khi tạo kết nối như một người dùng bình thường.
+ 
+ VD: Sau dòng này bạn add các user bạn muốn cho login ssh vào hệ thống. Ví dụ, tôi muốn cho tài khoản hong2551, hahong được quyền login vào hệ thống thì cấu hình như sau:
+
+AllowUsers hong2551 hahong
+### 2.4 Cài đặt bảo mật bổ sung
+Có các cấu hình được đề xuất khác để tránh các kết nối không mong muốn đến máy chủ SSH . Các kết nối này là:
+
+- LoginGraceTime : Chúng tôi sẽ thiết lập thời gian cần thiết để nhập mật khẩu, tránh để kẻ tấn công phải “suy nghĩ nhiều”.
+- MaxAuthTries : Số lần thử cho phép khi nhập mật khẩu trước khi ngắt kết nối.
+- MaxStartups : Số lần đăng nhập đồng thời từ một IP, để tránh sử dụng bạo lực với nhiều phiên cùng một lúc.
+- DenyUsers : Tạo một danh sách đen, những người dùng ở đây sẽ không thể kết nối 
+- AllowGroups / DenyUsers : Hoàn toàn giống như trên, nhưng thay vì tạo danh sách đen / trắng người dùng thì đó là các nhóm người dùng.
+
+
   
