@@ -24,6 +24,7 @@ Một số thư mục :
 |/tmp|Chứa các file tạm thời có thể bị xóa mà không có bất kỳ cảnh báo khi khởi động lại|
 |/usr|Chứa các tập tin thực thi, thư viện, tài liệu và mã nguồn cho các chương trình.|
 |/var|Chứa các file có thể thay đổi kích thước linh động như  log files,mail boxes, and spool files|
+
 Mounting ?
 - Trong quá trình gắn, một thiết bị được kết nối với một thư mục cụ thể, sao cho sau khi gắn kết, thư mục này cho phép truy cập vào noi dung thiết bị.
 - Hệ thống phân cấp này có thể được phân phối trên các thiết bị khác nhau và thậm chí các hệ thống máy tính được gắn vào thư mục gốc.
@@ -40,7 +41,7 @@ Các tùy chọn phổ biến
 |Các tùy chọn | Ý nghĩa|
 |----|----|
 |-L|Hiển thị danh sách tập tin, thư mục (chỉ hiện thị tên).|
-|-l|Hiển thị danh sách tập tin, thư mục (gồm nhiều cột: filename, size, date,….|
+|-l|Hiển thị chi tiết danh sách tập tin, thư mục (gồm nhiều cột: filename, size, date,….|
 |-a|Liệt kê tất cả các tập tin, thư mục, bao gồm những tập tin ẩn.|
 |-R|Liệt kê tất cả các tập tin, thư mục kể cả các tập tin, thư mục bên trong thư mục cha.|
 ### Lệnh grep
@@ -49,7 +50,7 @@ Lệnh ls -l của "/" cho kết quả nhiều thông tin, nếu muốn lọc l�
 VD: 
 > ls -l | grep pro  (Muốn xem trong "/" có tập tin, thư mục nào có ký tự là pro)
 > ls -l /etc/ | grep yum (Thư mục /etc có tập tin, thư mục nào có ký tự là yum )
-
+hoac find . - name "*.txt"
 #### Lệnh grep còn được dùng tìm kiếm chuỗi trong file
 VD: grep "yum" /root/*.txt (Tìm kiếm chuỗi "yum" trong các file có đuôi .txt trong thư mục /root:)
 ## 2.2 Lệnh pwd - xem bạn đang ở thư mục nào
@@ -70,7 +71,7 @@ Chú ý: Các biến môi trường là các biến có chứa các giá trị c
 Các lệnh cd thông dụng:
 - Di chuyển về thư mục gốc: cd /
 - Di chuyển đến 1 vị trí bất kì khi biết đường dẫn tuyệt đối: cd /etc/networks
-- Di chuyển đến thư mục con nằm trong thư mục hiện tại: cd docs hoặc ./docs
+- Di chuyển đến thư mục con nằm trong thư mục hiện tại: cd docs ; ./docs hoặc docs/
 - Di chuyển đến thư mục mẹ: cd ..
 - Lệnh cd không có tham số, sẽ đưa bạn về home directory, dù bất kể bạn đang ở đâu: cd hoặc cd ~
 - Lệnh cd dùng để quay về thư mục trước: cd -
@@ -144,7 +145,34 @@ Ví dụ: Di chuyển và đổi tên tập tin test1.txt trong /root sang /etc 
 |tess|Dùng để xem tập tin lớn hơn vì đây là chương trình phân trang.|
 Chú ý với head và tail có thể sửa dòng lệnh để đọc n dòng 
 VD:
->head -n 5 /etc/passwd
+>head -5 /etc/passwd
+
+
+
+Chú ý cách thay đổi password cho user đang login
+#passwd 
+nếu đang đăng nhập với tài khoản root bạn có thể thay đổi mật khẩu của tài khoản user
+#passwd user
+
+## Thực hành 
+1. Tạo thư mục TENSV trong Home
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/1.t%E1%BA%A1o%20TENSV.png)
+2. Tạo 1 tập tin danhsach.txt và baitap.sh trong TenSV
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/2.%20t%E1%BA%A1o%202%20file%20txt%20v%C3%A0%20sh.png)
+3. Tạo 1 tập tin trong /root có tên là thuchanh.txt và chuongtrinh.sh
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/3.%20t%E1%BA%A1o%20t%E1%BA%ADp%20trong%20root.png)
+4. Copy tập tin chuongtrinh.sh sang thư mục TENSV
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/3.%20t%E1%BA%A1o%20t%E1%BA%ADp%20trong%20root.png)
+5. Dùng lệnh vi tạo tập tin baitho.txt, viết 2 câu thơ vào tập tin đó, xong save lại
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/5.%20giao%20dien%20go%20tho.png)
+6. Xem(đọc) nội dung tập tin baitho.txt 
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/6.%20%C4%91%E1%BB%8Dc%20b%C3%A0i%20th%C6%A1.png)
+7. Di chuyển và đổi tên tập tin thuchanh.txt sang lythuyet.txt đến thư mục TenSV và xóa chuong trinh.sh khỏi root
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/7.di%20chuy%E1%BB%83n.png)
+8. Di chuyển baitho.txt vao TENSV
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/7.di%20chuy%E1%BB%83n.png)
+9. Xem nội dung câu đầu của tập baitho.txt, xem nội dung 2 câu cuối của tập baitho.txt
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/n%E1%BB%99i%20dung%20c%C3%A2u%20d%C3%A2u.%20c%C3%A2u%20cu%E1%BB%91i.png)
 
 Nguồn
 https://blogd.net/linux/lam-viec-voi-tap-tin-va-thu-muc-tren-linux/#2-l%E1%BB%87nh-cd
