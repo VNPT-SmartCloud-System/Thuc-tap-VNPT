@@ -35,8 +35,10 @@ Mounting ?
   - Nếu hệ thống tệp một thiết bị được lấp đầy hoàn toàn, có thể khó có thể cung cấp thêm không gian lưu trữ. 
 
 # 2. Các lệnh tương tác với thư mục
+
 ## 2.1. Lệnh ls - xem danh sách tập tin thư mục
 ls -[tùy chọn] [đường dẫn thư mục muốn xem]
+
 Các tùy chọn phổ biến
 |Các tùy chọn | Ý nghĩa|
 |----|----|
@@ -44,6 +46,8 @@ Các tùy chọn phổ biến
 |-l|Hiển thị chi tiết danh sách tập tin, thư mục (gồm nhiều cột: filename, size, date,….|
 |-a|Liệt kê tất cả các tập tin, thư mục, bao gồm những tập tin ẩn.|
 |-R|Liệt kê tất cả các tập tin, thư mục kể cả các tập tin, thư mục bên trong thư mục cha.|
+|-lrt|Hiển thị các lệnh được sắp xếp vào ngày sửa đổi. Bạn sẽ thấy các tệp được sửa đổi gần đây nhất trong danh sách.|
+
 ### Lệnh grep
 #### 2.1.1. Lọc lại tên tập tin thư mục muốn xem 
 Lệnh ls -l của "/" cho kết quả nhiều thông tin, nếu muốn lọc lại tên tập tin thư mục muốn xem chỉ cần thêm grep.
@@ -93,6 +97,8 @@ hoặc #mkdir /root/{abcdir1,abcdir2,abcdir3}
 
 (Khi đó nó sẽ tạo thư mục cha trước sau đó sẽ tạo thư mục con)
 ## 2.5. Lệnh xóa tập tin thư mục
+Sử dụng lệnh rm. Khi được sử dụng trên một tệp duy nhất, tệp đơn sẽ bị xóa. Để xóa thư mục có chứa các file cần thêm -r. Chú ý khi sử dụng option -i xóa tập tin sẽ được hỏi trước, nếu bạn không thích việc hỏi trước đó có thể sử dụng option -f => xóa mà không hỏi
+
 - Xóa tập tin 
 > #rm [đường dẫn]
 
@@ -110,6 +116,10 @@ VD: Xóa tập tin abc.txt trong /usr/passwd:
 
 ## 2.6. Lệnh copy tập tin, thư mục
 - Lệnh sao chép tập tin:
+  option: 
+   -a :Sao chép cả những quyền và dặc tính của thư mục
+   -R :Sao chép toàn bộ thư mục 
+   -l :link file thay vì copy
 >cp [đường dẫn nguồn] [đường dẫn đích]
 
 Ví dụ: Sao chép tập tin abc.txt trong thư mục /root sang /usr: 
@@ -174,5 +184,122 @@ nếu đang đăng nhập với tài khoản root bạn có thể thay đổi m�
 9. Xem nội dung câu đầu của tập baitho.txt, xem nội dung 2 câu cuối của tập baitho.txt
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/n%E1%BB%99i%20dung%20c%C3%A2u%20d%C3%A2u.%20c%C3%A2u%20cu%E1%BB%91i.png)
 
+## 3. Using Links
+
+Có symbolic links and hard links để hiểu một link cần biết về hệ thống file sử dụng inodes cho quản trị hệ thống tệp.
+Inodes được sử dụng để lưu trữ tất cả các dữ liệu trong file. Về phía người dùng ta có thể dễ dàng phân biệt với các file khác dựa vào tên filename, nhưng về phía hệ điều hành các file được phân biệt định danh bằng chỉ số inode. Mỗi file trong Linux có một inode và chứ thông tin quan trọng và tệp lưu trữ:
+  -  Khối dữ liệu nơi lưu trữ nội dung tệp
+  - Tạo, truy cập và ngày sửa đổi 
+  - Quyền
+  - Chủ sở hữu tập tin
+Có 1 phần quan trọng không được lưu trữ trong inode là tên của tệp, nó được lưu trức trong thư mục
+### Hard links
+![](http://blog.thiennk.net/assets/img/hard-link.png?style=center)
+
+Ta có file nguồn tên là filename, có chỉ số inode là inode, địa chỉ bộ nhớ addresses, vùng lưu trữ dữ liệu là data. Khi tạo hard link có tên file othername, thì chỉ số đi kèm với nó sẽ chính là inode của filename.
+
+Vì cùng chỉ số inode nên sẽ cùng tham chiếu đến một vùng nhớ chứa địa chỉ addresses của dữ liệu do đó sẽ cùng trỏ đến một vùng lưu trữ dữ liệu data. Tuy 2 mà 1, filename và othername cũng chỉ là hai cái tên về mặt người dùng nhưng đối với hệ thống nó gần như là như nhau. 
+
+- Một inode không biết nó có tên nào; nó chỉ biết có bao nhiêu tên được liên kết với inode , những tên này được gọi là hard links. Khi bạn tạo một file bạn cho nó một tên -> nó là một hard link. Trong Linux hệ thống file, nhiều hard links có thể được tạo từ một File, bạn có thể truy cập vào file từ nhiều địa điểm khác nhau
+Hạn chế của hard link:
+- Hard link phải tồn tài trên cùng một thiết bị
+- Không thể tạo hard link đến thư mục
+- Khi tên cuối(hard link) đến tệp bị xóa, truy cập vào dữ liệu của tệp cũng bị xóa.
+### Symbolic Links
+- Không liên kết trực tiếp với inode mà là tên của tệp. Điều này làm cho các symbolic linh hoạt hơn nhiều, nhưng nó cũng có một số nhược điểm. Ưu điểm của các symbolic link là chúng có thể liên kết đến file trên các thiết bị khác, cũng như trên các thư mục. Nhược điểm chính là khi tệp gốc bị xóa,liên kết tượng trưng trở nên không hợp lệ và không hoạt động nữa.
+- Tạo link:
+    - Sử dụng ln để tạo links, cách dùng giống với cp và mv.
+    - Tạo một symbolic link , ​​bạn sử dụng tùy chọn -s
+    - Tuy nhiên: để có thể tạo các liên kết cứng, bạn phải là chủ sở hữu của mục bạn muốn liên kết đến
+- Ví dụ về tạo symbolic link
+![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/symblic.png)
+
+## 4. Phân quyền trong linux
+#### User
+Đầu tiên, User (hay còn gọi là người dùng) là tài khoản dùng để đăng nhập vào hệ thống. Mỗi User sẽ chứa một mã UID (Unique identification number) hay mã xác định danh tính duy nhất, từ đó hệ thống có thể phân biệt được các người dùng với nhau.
+
+Dựa vào quyền hạn truy cập thì User được chia theo 2 loại chính:
+- Superuser/root/administrator : Loại User có quyền hạn cao nhất. Có khả năng truy cập vào mọi file có trong hệ thống.
+- Normal user: Là loại User thường, bị giới hạn một số quyền (Ta có thể tuỳ chọn các quyền mà user này có thể làm).
+#### Superuser
+Theo như ở trên thì bạn đã biết Superuser (hay còn được gọi là root) là một User hệ thống. Ta sử dụng Superuser khi muốn sử dụng các đặc quyền mà chỉ Superuser làm được còn User thường thì không.
+- Các đặc quyền mà Superuser có thể làm:
+
+  - Đặc quyền thay đổi read/write/exectue
+  - Tạo, tải file hay phần mềm
+  - Sửa đổi files và cài đặt
+  - Xoá thông tin User và data
+
+- Group (nhóm) là một tập hợp các user. Trong Linux, theo mặc định thì Normal User thường được xếp vào Default Group. Mục đính chính của Group là phân quyền của một hay nhiều tài nguyên cho các thành viên trong Group. Ta có thể thêm, bớt thành viên trong Group để phù hợp với mục đích. Có 2 loại group chính:
+
+   - Primary/ Login group (Nhóm chính/ Nhóm đăng nhập): Là nhóm được gán cho files được tạo bởi User. Thông thường, tên của nhóm chính giống với tên của người dùng. Người dùng bắt buộc phải nằm trong một nhóm chính nào đó.
+   - Secondary/ Supplementary group (Nhóm phụ/ nhóm bổ sung): Được sử dụng để cung cấp các đặc quyền nhất định cho một nhóm người dùng. Các User có thể là thành viên của không hoặc nhiều nhóm phụ.
+### Read, write, execute trong phân quyền file:
+   - READ/ r / 4 (Đọc): Quyền đọc cho phép bạn mở file và xem nội dung của nó. Trong trường hợp thư mục thì bạn có thể xem các thành phần con trong nó.
+   - WRITE/ w/ 2 (Viết): Quyền viết hay ghi cho phép bạn thay đổi nội dung của file. Trong trường hợp thư mục thì bạn có thể thay đổi vị trí, xoá, thêm các thành phần con trong nó
+   - EXECUTE/ x/1 (Thực thi): Quyền thực thi cho phép bạn chạy file.
+   - 
+![](https://ebudezain.com/compress/70/upload/images/shell/linux.jpg?v=1.1.28)
+
+Khi bạn gọi lệnh xem quyền linux sẽ show cho bạn 1 dãy gồm 10 chữ số. khi đó vị trí: 
+ - 0 - chỉ định danh file, folder, link
+ - 1,2,3 - chỉ định quyền người sở hữu ( là ngừoi tạo ra nó )
+ - 4,5,6  - chỉ định quyền của những user trong group đó
+ - 7,8,9 - chỉ định quyền của những user khác không nằm trong group 
+Ví dụ:
+> - rw- --- --- : File thường, User read, write.
+
+>- rwx r-x r-x : File thường, User read,write, execute, Group read, execute, Other read,execute.
+
+>d rw- r-x --- : Thư mục, User read, write, Group read, execute.
+
+>i rwx r-- r-- : Link, User read,write, execute, Group read, Other read.
+
+### 4.2 Phân quyền với chmod
+- Sử dụng 3 chứ số bát phân (nên sử dụng khi có nhu cầu thêm hay xóa quyền)
+![](https://123host.vn/uploads/tutorial/8574193624.png)
+```sh 
+chmod [user][group][other] [filename] 
+```
+Ví dụ : Owner read, write, group read, execute, other read
+User: Read + write = 4 + 2 = 6
+Group: Read + execute = 4 + 1 = 5
+Other: Read = 4
+Ta thu được: 654
+### 4.3 Phân quyền với chown 
+chown (change ownership): Thay đổi “chủ quyền” của file hoặc folder. Cú pháp:
+```sh
+chown [options] [newowner:newgroup] file  
+```
+Có 5 cách để làm việc này:
+
+||Miêu tả |
+|---|----|
+|user|Tên của người sở hữu mới, dấu hai chấm (“:”) và tên nhóm mới được bỏ qua, tức là nhóm sở hữu sẽ không thay đổi|
+|user:group|Dạng đầy đủ của chủ mới và nhóm mới, được ngăn cách bởi dấu hai chấm và không có khoảng cách ở giữa|
+|:group|Chủ sở hữu sẽ được bỏ qua, nhóm sở hữu mới bắt buộc phải đi sau dấu hai chấm|
+|user:|Nhóm sở hữu được bỏ qua, ở đây nhóm sở hữu mới sẽ được gán bằng nhóm login của user|
+|:|Bỏ qua cả hai, tức là không thay đổi gì cả|
+
+Chú ý: Chủ sở hữu không thể chuyển quyền sở hữu trừ phi họ là root hoặc sử dụng sudo. Nhóm sở hữu sẽ được thay đổi bởi chủ sở hữu nếu chủ sở hữu thuộc nhóm đó.Vì vậy, tôi khuyến nghị chạy chown dưới quyền super admin
+
+### 4.4 Useradd
+- Create user
+  
+```sh
+#useradd [options] username
+```
+Options:
+- Với -p sẽ yêu cầu nhập mật khẩu tài khoản user vừa tạo. 
+- Với -m sẽ tạo một user với thư mục home mặc định
+- Với -u number tự tạo ra ID tùy chọn
+C2: Thiết lập mật khẩu
+```sh
+#passwd  username
+```
+Khi đấy sẽ in ra dòng yêu cầu password
+
 Nguồn
-https://blogd.net/linux/lam-viec-voi-tap-tin-va-thu-muc-tren-linux/#2-l%E1%BB%87nh-cd
+[](https://blogd.net/linux/lam-viec-voi-tap-tin-va-thu-muc-tren-linux/#2-l%E1%BB%87nh-cd)
+[](https://viblo.asia/p/hard-links-va-symbolic-links-tren-linux-07LKXJR2lV4)
+
