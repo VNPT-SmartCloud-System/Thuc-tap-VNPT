@@ -299,7 +299,9 @@ C2: Thiết lập mật khẩu
 ```
 Khi đấy sẽ in ra dòng yêu cầu password
 
+
 Nguồn
-[](https://blogd.net/linux/lam-viec-voi-tap-tin-va-thu-muc-tren-linux/#2-l%E1%BB%87nh-cd)
-[](https://viblo.asia/p/hard-links-va-symbolic-links-tren-linux-07LKXJR2lV4)
+[Thao tac thu muc](https://blogd.net/linux/lam-viec-voi-tap-tin-va-thu-muc-tren-linux/#2-l%E1%BB%87nh-cd)
+[symbolic](https://viblo.asia/p/hard-links-va-symbolic-links-tren-linux-07LKXJR2lV4)
+[phan quyen](https://123host.vn/community/tutorial/gioi-thieu-ve-phan-quyen-tren-linux.html)
 
