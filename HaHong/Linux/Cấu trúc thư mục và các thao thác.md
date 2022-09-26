@@ -1,6 +1,9 @@
 
+## Nội dung 
 - Tìm hiểu về cấu trúc thư mục trong Linux
 - Cách sử dụng các lệnh tương tác với thư mục: pwd, cd, mkdir, rmdir,..
+- Tìm hiểu về phân quyền trong linux.
+- Học cách sử dụng các lệnh: useradd, chmod, chown,...
 ## 1. The Linux File Hierarchy Structure hay Filesystem Hierarchy Standard (FHS)
 - Một hệ thống Linux được trình bày như một phân cấp với thư mục gốc (/) làm điểm bắt đầu.
 - Là danh sách các folder được xắp xếp bên trong hệ điều hành Linux, qua đó dữ liệu sẽ được lưu trữ đúng nơi vị trí của nó.
@@ -52,8 +55,14 @@ Các tùy chọn phổ biến
 #### 2.1.1. Lọc lại tên tập tin thư mục muốn xem 
 Lệnh ls -l của "/" cho kết quả nhiều thông tin, nếu muốn lọc lại tên tập tin thư mục muốn xem chỉ cần thêm grep.
 VD: 
-> ls -l | grep pro  (Muốn xem trong "/" có tập tin, thư mục nào có ký tự là pro)
-> ls -l /etc/ | grep yum (Thư mục /etc có tập tin, thư mục nào có ký tự là yum )
+```sh
+ ls -l | grep pro 
+```
+ (Muốn xem trong "/" có tập tin, thư mục nào có ký tự là pro)
+```sh
+ ls -l /etc/ | grep yum 
+ ```
+(Thư mục /etc có tập tin, thư mục nào có ký tự là yum )
 hoac find . - name "*.txt"
 #### Lệnh grep còn được dùng tìm kiếm chuỗi trong file
 VD: grep "yum" /root/*.txt (Tìm kiếm chuỗi "yum" trong các file có đuôi .txt trong thư mục /root:)
@@ -120,20 +129,26 @@ VD: Xóa tập tin abc.txt trong /usr/passwd:
    -a :Sao chép cả những quyền và dặc tính của thư mục
    -R :Sao chép toàn bộ thư mục 
    -l :link file thay vì copy
->cp [đường dẫn nguồn] [đường dẫn đích]
+>cp [Options] [đường dẫn nguồn] [đường dẫn đích]
 
 Ví dụ: Sao chép tập tin abc.txt trong thư mục /root sang /usr: 
 > #cp /root/abc.txt /usr
 
 - Lệnh sao chép thư mục:
 > #cp -r [đường dẫn nguồn] [đường dẫn đích]
-> 
+
 Ví dụ: Sao chép thư mục /root/networks sang /usr/bin:
 
-> #cp -r /root/networks /usr/bin
+```sh
+#cp -r /root/networks /usr/bin
+```
 ## 2.7 Lệnh mv - dùng di chuyển, đổi tên
 - Cần đổi tên một tập tin
->#mv [đường dẫn với tên củ] [đường dẫn với tên mới]
+>#mv  [Options] [đường dẫn với tên củ] [đường dẫn với tên mới]
+
+Option:
+  -i: Nhắc trước khi di chuyển với tập tin/ thư mục đích đã có rồi
+  -f: Ghi đè khi di chuyển với tập tin/thư mục đích đã có rồi
 
 Ví dụ: Đổi tên tập tin test1.txt trong /root thành test.txt:
 >#mv /root/test1.txt /root/test.txt
@@ -166,22 +181,78 @@ nếu đang đăng nhập với tài khoản root bạn có thể thay đổi m�
 
 ## Thực hành 
 1. Tạo thư mục TENSV trong Home
+``` sh
+mkdir /home/TENSV/
+```
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/1.t%E1%BA%A1o%20TENSV.png)
+
 2. Tạo 1 tập tin danhsach.txt và baitap.sh trong TenSV
+```sh
+touch /home/TENSV/danhsach.txt
+touch /home/TENSV/baitap.sh
+```
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/2.%20t%E1%BA%A1o%202%20file%20txt%20v%C3%A0%20sh.png)
-3. Tạo 1 tập tin trong /root có tên là thuchanh.txt và chuongtrinh.sh
+
+3. Tạo 1 tập tin trong /root có tên là thuhanh.txt và chuongtrinh.sh
+```sh
+touch /root/thuhanh.txt
+touch /root/chuongtrinh.sh
+```
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/3.%20t%E1%BA%A1o%20t%E1%BA%ADp%20trong%20root.png)
+
 4. Copy tập tin chuongtrinh.sh sang thư mục TENSV
+```
+cp /root/chuongtrinh.sh /home/TENSV/
+```
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/3.%20t%E1%BA%A1o%20t%E1%BA%ADp%20trong%20root.png)
+
 5. Dùng lệnh vi tạo tập tin baitho.txt, viết 2 câu thơ vào tập tin đó, xong save lại
+   - Vi: - là trình soạn thảo có mặt trên các hệ điều hành Unix/Linux
+- Sử dụng trong việc sửa các file cấu hình trên Linux.
+#vi <file> ta sẽ vào chế độ command mode
+![](image/vi.png)
+- Lệnh cơ bản:
+  - dd: xóa dòng
+  - x: xóa ký tự
+  - yy: copy dòng
+  - p: patsr dòng
+  - /<chuối>: tìm chuổi
+  - :x : thoát lưu
+  - :q : thoát thông lưu
+- Để vào chế độ text mode: :i, a
+
+```sh
+vi baitho.txt
+```
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/5.%20giao%20dien%20go%20tho.png)
+
 6. Xem(đọc) nội dung tập tin baitho.txt 
+```sh
+cat baitho.txt
+```
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/6.%20%C4%91%E1%BB%8Dc%20b%C3%A0i%20th%C6%A1.png)
-7. Di chuyển và đổi tên tập tin thuchanh.txt sang lythuyet.txt đến thư mục TenSV và xóa chuong trinh.sh khỏi root
+
+7. Di chuyển và đổi tên tập tin thuchanh.txt sang lythuyet.txt đến thư mục TenSV và xóa chuongtrinh.sh khỏi root
+```sh
+mv /root/thuhanh.txt /home/TENSV?lythuyet.txt
+rm /root/chuongtrinh.sh
+```
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/7.di%20chuy%E1%BB%83n.png)
+
 8. Di chuyển baitho.txt vao TENSV
+```sh
+mv baitho.txt home/TENSV/
+```
+   
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/7.di%20chuy%E1%BB%83n.png)
+
 9. Xem nội dung câu đầu của tập baitho.txt, xem nội dung 2 câu cuối của tập baitho.txt
+```sh
+cat home/TENSV/baitho.txt
+head -1 home/TENSV/baitho.txt
+tail -2 home/TENSV/baitho.txt
+```
+
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/n%E1%BB%99i%20dung%20c%C3%A2u%20d%C3%A2u.%20c%C3%A2u%20cu%E1%BB%91i.png)
 
 ## 3. Using Links
@@ -215,14 +286,17 @@ Hạn chế của hard link:
 ![](https://raw.githubusercontent.com/HaHong2551/Thuc-tap/main/linux/image/symblic.png)
 
 ## 4. Phân quyền trong linux
-#### User
+### 4.1. User, Group
+
 Đầu tiên, User (hay còn gọi là người dùng) là tài khoản dùng để đăng nhập vào hệ thống. Mỗi User sẽ chứa một mã UID (Unique identification number) hay mã xác định danh tính duy nhất, từ đó hệ thống có thể phân biệt được các người dùng với nhau.
 
-Dựa vào quyền hạn truy cập thì User được chia theo 2 loại chính:
-- Superuser/root/administrator : Loại User có quyền hạn cao nhất. Có khả năng truy cập vào mọi file có trong hệ thống.
-- Normal user: Là loại User thường, bị giới hạn một số quyền (Ta có thể tuỳ chọn các quyền mà user này có thể làm).
-#### Superuser
-Theo như ở trên thì bạn đã biết Superuser (hay còn được gọi là root) là một User hệ thống. Ta sử dụng Superuser khi muốn sử dụng các đặc quyền mà chỉ Superuser làm được còn User thường thì không.
+Dựa vào quyền hạn truy cập thì User được chia theo 3 loại chính:
+- Superuser/root/administrator : Loại User có quyền hạn cao nhất. Có khả năng truy cập vào mọi file có trong hệ thống(UID=0)
+- Normal user: Là loại User thường, bị giới hạn một số quyền (Ta có thể tuỳ chọn các quyền mà user này có thể làm, UID start to 1000).
+- System user: Những tài khoản người dùng được tạo ra bởi hệ thống để chạy các processes hoặc daemons. Mỗi users có những files và resources riêng. UIDs nằm trong khoảng từ 1 – 999
+  
+Note: Superuser
+
 - Các đặc quyền mà Superuser có thể làm:
 
   - Đặc quyền thay đổi read/write/exectue
@@ -230,15 +304,59 @@ Theo như ở trên thì bạn đã biết Superuser (hay còn được gọi l�
   - Sửa đổi files và cài đặt
   - Xoá thông tin User và data
 
-- Group (nhóm) là một tập hợp các user. Trong Linux, theo mặc định thì Normal User thường được xếp vào Default Group. Mục đính chính của Group là phân quyền của một hay nhiều tài nguyên cho các thành viên trong Group. Ta có thể thêm, bớt thành viên trong Group để phù hợp với mục đích. Có 2 loại group chính:
+- Group (nhóm) là một tập hợp các user. Mục đính chính của Group là phân quyền của một hay nhiều tài nguyên cho các thành viên trong Group. Ta có thể thêm, bớt thành viên trong Group để phù hợp với mục đích. Có 2 loại group chính:
 
    - Primary/ Login group (Nhóm chính/ Nhóm đăng nhập): Là nhóm được gán cho files được tạo bởi User. Thông thường, tên của nhóm chính giống với tên của người dùng. Người dùng bắt buộc phải nằm trong một nhóm chính nào đó.
    - Secondary/ Supplementary group (Nhóm phụ/ nhóm bổ sung): Được sử dụng để cung cấp các đặc quyền nhất định cho một nhóm người dùng. Các User có thể là thành viên của không hoặc nhiều nhóm phụ.
+
+#### Các file chứa thông tin user
+File /etc/passwd: là tập tin văn bản chứa thông tin về các tài khoản user trên máy. Mọi user đều có thể đọc tập tin này nhưng chỉ có root mới có quyền thay đổi. tập tin /etc.passwd 
+
+![](image/etcpasswd.png)
+(1)login name: (2)password: (3)user ID: (4)Group ID: (5)Real name(GECOS):(6)Home directy:(7)shell
+
+- Cột 1: tên người sử dụng
+- Cột 2: mã liên quan đến mật khẩu 'x' đối với Linux. Linux lưu mã này trong một tập tin khác /etc/shadow mà chỉ root mới có quyền đọc
+- Cột 3, 4: user ID, group ID
+- Cột 5: Tên mô tả người sử dụng
+- Cột 6: Thư mục home của user
+- Cột 7: Shell sẽ hoạt động sau khi user login, thường là /bin/bash
+
+/etc/shadow: là tập tin văn bản chứa thông tin về mật khẩu của các tài khoản user trên máy chỉ root mới có quyền đọc tập tin này
+
+![](image/shadow.png)
+
+- Cột 1: Tên người sử dụng, tên này cũng giống với tên trong /etc/passwd
+- Cột 2: Mật khẩu đã được mã hóa($1 MD5 hashing, $5 SHA-256, $6 SHA-512)
+- Cột 3: Số ngày kể từ lần cuối thay đổi mật khẩu (tính từ 1/1/1979)
+- Cột 4: Số ngày tối thiểu được phép thay đổi passwd
+- Cột 5: Số ngày mật khẩu có giá trị 
+- Cột 6: Số ngày cảnh báo user trước khi mật khẩu hết hạn
+- Cột 7: Số ngày sau khi mật khẩu hết hạn tài khoản sẽ bị xóa
+- Cột 8: Số ngày kể từ khi tài khoản bị khóa
+
+#### Các file chứa thông tin Group
+File /etc/group
+
+VD: hoctoan:x:1000:nam,nu
+- Cột 1: Tên nhóm
+- Cột 2: mật khẩu của group (/etc/gshadow)
+- Cột 3: Mã nhóm (gid)
+- Cột 4: Danh sách các user thuộc nhóm
+
+File /etc/gshadow: chứa thông tin password của nhóm
+VD: hoctoan:$6$IHauh...AbortController[Symbol].:nam:nam,nu
+- Cột 1 tên nhóm
+- Cột 2 Chuỗi passwd đã mã hóa
+- Cột 3 Danh sách các user có quyền admin trên group này
+- Cột 4 Danh sách các user thuộc nhóm
+
 ### Read, write, execute trong phân quyền file:
+- Quyền truy xuất trên thư mục và tập tin được trình bày trên lệnh ls
    - READ/ r / 4 (Đọc): Quyền đọc cho phép bạn mở file và xem nội dung của nó. Trong trường hợp thư mục thì bạn có thể xem các thành phần con trong nó.
    - WRITE/ w/ 2 (Viết): Quyền viết hay ghi cho phép bạn thay đổi nội dung của file. Trong trường hợp thư mục thì bạn có thể thay đổi vị trí, xoá, thêm các thành phần con trong nó
    - EXECUTE/ x/1 (Thực thi): Quyền thực thi cho phép bạn chạy file.
-   - 
+  
 ![](https://ebudezain.com/compress/70/upload/images/shell/linux.jpg?v=1.1.28)
 
 Khi bạn gọi lệnh xem quyền linux sẽ show cho bạn 1 dãy gồm 10 chữ số. khi đó vị trí: 
@@ -256,8 +374,10 @@ Ví dụ:
 >i rwx r-- r-- : Link, User read,write, execute, Group read, Other read.
 
 ### 4.2 Phân quyền với chmod
-- Sử dụng 3 chứ số bát phân (nên sử dụng khi có nhu cầu thêm hay xóa quyền)
+- Lệnh chmod: Thay đổi quyền truy xuất trên thư mục tập tin. Chỉ có người sở hữu mới có thể thực hiện quyền này (3 chứ số bát phân) 
+
 ![](https://123host.vn/uploads/tutorial/8574193624.png)
+- Cach 1
 ```sh 
 chmod [user][group][other] [filename] 
 ```
@@ -266,8 +386,29 @@ User: Read + write = 4 + 2 = 6
 Group: Read + execute = 4 + 1 = 5
 Other: Read = 4
 Ta thu được: 654
+- Cách 2: Lệnh chmod: quyền truy xuất mới có thể gán cho từng nhóm quyên bằng cách sử dụng ký tư:
+  - u: đại diện cho quyền của người sở hữu
+  - g: đại diện cho quyền của nhóm
+  - o: đại diện cho quyền của người dùng khác
+  - a: all (owner, group, others)
+  Ký tự: +: gán thêm quyền 
+
+  -: rút bớt quyền
+
+  =: không đổi
+  VD:
+  - g+w : thêm quyền ghi cho nhóm
+  - o-r : xóa quyền đọc với mọi người dùng khác
+  VD: 
+  ```sh
+  ls -l /etc/passwd
+  chmod 740 /etc/passwd
+   ls -l /etc/passwd
+   ```
+
+![](image/chmod.png)
 ### 4.3 Phân quyền với chown 
-chown (change ownership): Thay đổi “chủ quyền” của file hoặc folder. Cú pháp:
+chown (change ownership): Thay đổi quyền sở hữu của file hoặc folder. Cú pháp:
 ```sh
 chown [options] [newowner:newgroup] file  
 ```
@@ -282,25 +423,103 @@ Có 5 cách để làm việc này:
 |:|Bỏ qua cả hai, tức là không thay đổi gì cả|
 
 Chú ý: Chủ sở hữu không thể chuyển quyền sở hữu trừ phi họ là root hoặc sử dụng sudo. Nhóm sở hữu sẽ được thay đổi bởi chủ sở hữu nếu chủ sở hữu thuộc nhóm đó.Vì vậy, tôi khuyến nghị chạy chown dưới quyền super admin
-
-### 4.4 Useradd
-- Create user
-  
 ```sh
-#useradd [options] username
+ls -l /home/TENSV/baitho.txt
+chown hong2551 /home/TENSV/baitho.txt
+ls -l /home/TENSV/baitho.txt
+```
+![](image/chown.png)
+
+### 4.4 Các lệnh quản lý với user, group
+#### User
+-  Lệnh useradd: tạo tài khoản user
+```sh
+useradd [options] username
 ```
 Options:
-- Với -p sẽ yêu cầu nhập mật khẩu tài khoản user vừa tạo. 
-- Với -m sẽ tạo một user với thư mục home mặc định
-- Với -u number tự tạo ra ID tùy chọn
-C2: Thiết lập mật khẩu
-```sh
-#passwd  username
-```
-Khi đấy sẽ in ra dòng yêu cầu password
 
+  - -p sẽ yêu cầu nhập mật khẩu tài khoản user vừa tạo. 
+  - -m sẽ tạo một user với thư mục home mặc định
+  - -u number tự tạo ra ID tùy chọn
+  - -d : chỉ định thư mục home
+
+- Lệnh passwd: Thiết lập mật khẩu
+
+```sh
+passwd  username
+```
+- Lệnh usermod [Options] login_name
+- Opyions:
+  - -c: Comment, tạo bí danh
+  - -l: thay đổi tên user
+  - -g: chỉ định nhóm chính
+  - -G: chỉ định nhóm phụ
+  - -d: thay đổi thư mục home
+  - -L: Lock account
+
+- Lệnh userdel: Xóa tài khoản user
+
+Cấu trúc lệnh: userdel [Options] login_name
+-r: xóa thư mục home của user
+
+#### Group 
+- Lệnh groupadd :tạo nhóm
+```sh
+ groupadd -g ten_nho
+```
+ Với -g là option tạo mã nhóm GID
+
+-  Lệnh groupmod:sua thông tin nhóm
+Cấu trúc lệnh: groupmod [options] group
+  - -g: Sửa mã nhóm thành GID
+  - -n: Sửa tên nhóm 
+- Lệnh groups: dùng user đang thuộc nhóm nào
+Cấu trúc lệnh: groups [options] ten_user
+- Lệnh gpasswd: đặt passwd cho group
+Cấu trúc lệnh: gpasswd [options] ten_nhom
+Options:
+-a: thêm thành viên
+-A: thêm user administrator cho nhóm
+-d: xóa thành viên
+-r: xóa password cho nhóm
+- Lệnh newgrp: dùng để 1 user vào 1 nhóm
+Cấu trúc lệnh: newgrp ten_nhom
+
+VD: Một lớp mới có một học sinh mới chuyển đến có tên Nguyễn Văn A. Tạo 3 nhóm hoc_toan, hoc_ly, hoc_hoa
+
+![](image/VD%20tao%20nhom.png)
+
+ Sau đó đổi tên tài khoản thành Nguyen_Van_A, đổi UID, thư mục của user là /home/A, sau đó add Nguyen_Van_A vào 3 nhóm hoc_toan; hoc_ly; hoc_hoa.
+
+![](image/usermod.png)
+
+
+Đặt mật khẩu cho nhóm hoc_toan, tạo một user Nguyen_Van_B sau đó sử dụng tài khoản root thêm B vào nhóm hoc_toan, login vào user Nguyen_Van_C tham gia vào nhóm hoc_toan
+
+```sh
+gpasswd hoc_toan
+useradd -u 1034 Nguyen_Van_B
+useradd -u 1035 Nguyen_Van_C
+passwd Nguyen_Van_B
+passwd Nguyen_Van_C
+gpasswd -a Nguyen_Van_B hoc_toan
+```
+
+Login Nguyen_Van_C và tự tham gia nhóm hoc_toan khi đã biết password
+```sh
+newgrp hoc_toan
+groups
+```
+![](image/Nguyen_Van_C.png)
+
+Đăng nhập vào tài khoản root kiểm tra
+```sh
+cat /etc/gshadow
+```
+![](image/addgroup.png)
 
 Nguồn
+
 [Thao tac thu muc](https://blogd.net/linux/lam-viec-voi-tap-tin-va-thu-muc-tren-linux/#2-l%E1%BB%87nh-cd)
 [symbolic](https://viblo.asia/p/hard-links-va-symbolic-links-tren-linux-07LKXJR2lV4)
 [phan quyen](https://123host.vn/community/tutorial/gioi-thieu-ve-phan-quyen-tren-linux.html)
