@@ -518,6 +518,77 @@ cat /etc/gshadow
 ```
 ![](image/addgroup.png)
 
+Người dùng khi sở hữu một file thì mới có khả năng phân quyền cho file đó, những người dùng khác và nhóm kể cả có quyền read, write lẫn execute thì vẫn không được phép thay đổi quyền của file. Ngoại lệ duy nhất là siêu người dùng root, cho dù là bất cứ file nào thì root cũng có thể phân quyền được, không quan trọng ai là người sở hữu. 
+Và các file được tạo ra bởi người dùng thì luôn có những giá trị mặc định được thiết lập sẵn theo bảng sau:
+
+|Type|Owner|Group|Other|
+|---|---|---|---|
+|File|rw-|r--|r--|
+|Directory|rwx|r-x|r-x|
+
+#### Các quyền đặc biệt Setuid/Setgid
+- SETUID  và SETGID là các cờ xác định quyền truy cập trên các hệ thống Linux cho phép người dùng chạy một tệp thực thi với quyền của chủ sở hữu hoặc nhóm sở hữu của tệp đó và để thay đổi các hành vi trong thư mục. Dược sử dụng để cho phép người dùng trên một hệ thống máy tính chạy các chương trình với các đặc quyền tạm thời nâng cao để thực hiện một tác vụ cụ thể. 
+
+- SETUID  và SETGID là cần thiết cho các tác vụ yêu cầu đặc quyền cao hơn so với các người dùng thông thường hiện có, chẳng hạn như thay đổi mật khẩu đăng nhập của họ.
+
+- Các cờ setuid và setgid có ý nghĩa hoàn toàn khác nhau tùy thuộc vào việc chúng được đặt trên một tệp hay một thư mục.
+
+- Các quyền setuid/setguid được sử dụng để thông báo cho hệ thống chạy một tệp thực thi với tư cách là chủ sở hữu với quyền của chủ sở hữu.
+- Có 2 cách thêm SETUID:
+chmod u+s [file]
+hoặc
+
+chmod [4]750 [file]   ( thêm 4 vào đầu file_permisson )
+Chú ý : Nếu file chưa có quyền thực thi , SUID sẽ là chữ S . Để kí tự S thành s phải cấp quyền execute cho nó.
+chmod u+x file1
+- Có 2 cách thêm SGID
+chmod g+s [file]
+hoặc
+
+chmod [2]750 [file]   (thêm 2 vào đầu file_permission)
+
+![](image/suid.png)
+
+#### Sticky Bit
+- Được dùng cho các thư mục chia sẻ , mục đích là ngăn chặn việc người dùng này xóa file của người dùng kia . Chỉ duy nhất owner file và root mới có quyền rename hay xóa các file , thư mục khi nó được set sticky bit .
+- Sticky bit được mô tả bằng chữ cái t ở cuối dòng hiển thị permission .
+  
+![](image/sticky.png)
+
+Có 2 cách thêm **Sticky Bit** cho thư mục :
+chmod o+t [file]
+hoặc
+
+chmod [1]750 [file]  (thêm 1 vào đầu file_permission)
+
+*Biểu diễn bằng số thì 4 cho setuid, 2 cho setgid và 1 cho sticky*
+
+- Các lệnh hỗ trợ khác:
+ - Xóa SUID :
+```sh 
+chmod u-s [file]
+```
+  - Xóa SGID :
+```sh
+chmod g-s [file]
+```
+  - Xóa Sticky Bit :
+```sh
+chmod o-t [file]
+```
+  - Tìm tất cả các file có SUID :
+  ```sh
+find / -perm -4000
+```
+   - Tìm tất cả các file có SGID :
+```sh
+find / -perm -2000
+```
+  - Tìm tất cả các file có Sticky Bit :
+```sh
+find / -perm -1000
+```
+
 Nguồn
 
 [Thao tac thu muc](https://blogd.net/linux/lam-viec-voi-tap-tin-va-thu-muc-tren-linux/#2-l%E1%BB%87nh-cd)
