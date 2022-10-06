@@ -38,7 +38,7 @@ quản lý tiến trình
   - Hàng chờ sẵn sàng: các hàng chờ trong bộ nhớ chính, sẵn sàng và chờ thực thi
   - Hàng chờ thiết bị: Một tiến trình đang được thực thi và đang đợi thiết bị vào ra
 
-- Linux cho phép nhiều tiến trình chạy cùng lúc:
+- Linux dac diem tiến trình 
    - Nhân linux có một module riêng lập lịch phân phối CPU
 cho từng tiến trình để đảm bảo các tiến trình đều được
 hoạt động hợp lý
