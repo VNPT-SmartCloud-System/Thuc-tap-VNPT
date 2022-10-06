@@ -1,41 +1,81 @@
 ## Tiến trình (process)
 - Tiến trình là một chương trình đang thức thi (chương trình đang được ở trong bộ nhớ trong và đang được làm việc với CPU)
+- Khi chương trình hoạt động. nó chuyển thành tiến trình, tiến trình cần:
+   - Được cung cấp đầy đủ tài nguyên cần Thiết
+   - Được CPU tiếp nhận và thực hiện
 - Các trạng thaí của tiến trình
-![](image/trangthaitientrinh.png)
+![](image/trangthaitientring.png)
   - new: Khi chương trình vừa được load từ bộ nhớ ngoài vào trong bộ nhớ trong
   - ready: đợi đến lượt làm việc với CPU
   - running: các tiến trình đang được xử lý
-  - terminated: khi chuong trình kết thúc được
-  - waiting: khi có yêu cầu vào ra, quá khoảng thời gian cho phép hoặc chờ cấp phát thêm tài nguyên.
-- Khi khởi chạy, mỗi tiến trình được cấp một chỉ số
+  - terminated: khi chuong trình kết thúc 
+  - waiting: khi có yêu cầu vào ra, quá khoảng thời gian cho phép hoặc chờ cấp phát thêm tài nguyên để chuyển trạng thái sẵn sàng
+- CPU chuyển giữa các tiến trình
+![](image/chuyengiaotientrinh.png)
+- Đặc điểm tiến trình:
+   - Tiến trình hướng I/O: sử dụng nhiều thời gian thực hiện vào/ra hơn việc tính toán, chiếm dụng CPU ngắn\
+   - Tiến trình hướng xử lý: sử dụng nhiều thời gian tính toán hơn việc I/o
+   - Tiến trình tương tác hay xử lý theo lô
+  
+#### Khối điều khiển tiến trình (Process Control Block)
+- PCB: là vùng nhớ lưu trữ các thông tin mô tả cho tiến trình, mỗi tiến trình có một PCB
+- Cấu trúc PCB:   
+     - Khi khởi chạy, mỗi tiến trình được cấp một chỉ số
 PID (process id) duy nhất. Hệ thống dùng PID để
 quản lý tiến trình
-- Tiến trình cũng có phân quyền sở hữu và truy cập
+     - Trạng thái tiến trình: Xác định trang thái hiện Thời
+     - Tài nguyên liên quan đến tiến trình (hiện có hoặc đang đợi phân bố)
+     - Thông tin giao tiếp: phản ánh quan hệ giữa tiến trình này với các tiến trình khác trong hệ thống
+     - Tiến trình cũng có phân quyền sở hữu và truy cập
 (như với tập tin)
-- Linux cho phép nhiều tiến trình chạy cùng lúc:
-  - Nhân linux có một module riêng lập lịch phân phối CPU
-cho từng tiến trình để đảm bảo các tiến trình đều được
-hoạt động hợp lý
-  - Mỗi tiến trình có một chỉ số ưu tiên (priority) tương ứng
-  - Chỉ số ưu tiên càng thấp thì hệ thống càng ưu tiên phân phối nhiều thời gian sử dụng CPU cho tiến trình đó
-
+- Lập lịch cho tiến trình: nhằm tối ưu việc sử dụng CPU trong hệ thống cho phép chia sẻ thời gian chuyển CPU giữa các tiến trình
 - Hàng chờ lập lịch:
   - Hàng chờ nhiệm vụ: các hàng chờ đang đợi làm việc với CPU
   - Hàng chờ sẵn sàng: các hàng chờ trong bộ nhớ chính, sẵn sàng và chờ thực thi
   - Hàng chờ thiết bị: Một tiến trình đang được thực thi và đang đợi thiết bị vào ra
+
+- Linux cho phép nhiều tiến trình chạy cùng lúc:
+   - Nhân linux có một module riêng lập lịch phân phối CPU
+cho từng tiến trình để đảm bảo các tiến trình đều được
+hoạt động hợp lý
+  - Mỗi tiến trình có một chỉ số ưu tiên (priority) tương ứng
+  - Chỉ số ưu tiên càng thấp thì hệ thống càng ưu tiên phân
+phối nhiều thời gian sử dụng CPU cho tiến trình đó
+
+
 - Tiến trình cha và tiến trình con:
   - Khi một tiến trình sinh ra 1 tiến trình khác là tiến trình cha, tiến trình được sinh ra tiến trình con
   - Khi tiến trình con hoàn thành thì tiến trình cha sẽ tiếp tục thực thi và tiến trình con sẽ được kết thức.
 của nó đã kết thúc thì được gọi là orphan proces. Hoặc cũng có thể tiến trình cha và con thực thi đồng thời
   - Cây tiến trình: Mỗi tiến trình cha có thể tạo một số tiến trình con, và những tiến trình con này có thể tạo các tiến trình con khác, tạo thành cây tiến trình
-- Hệ thống linux có một số các tiến trình đặc biệt gọi
-là các daemon process:
+#### Các loại tiến trình:
+
+-  Foreground processes: Những kiểu processes này được biết đến là interactive processes .Theo mặc định , mọi process mà bạn bắt đầu chạy là foreground process . Nó nhận input từ bàn phím và gửi output tới màn hình .Trong khi một chương trình đang chạy trong foreground và cần một khoảng thời gian dài, chúng ta không thể chạy bất kỳ lệnh khác (bắt đầu process khác) bởi vì dòng nhắc lệnh không có sẵn tới khi chương trình đang chạy kết thúc process và thoát ra.
+
+ - Background processes: Là những kiểu processes được biết đến là non-interactive processes.Cchạy mà không được kết nối với bàn phím của bạn . Nếu backround process yêu cầu bất cứ đầu vào từ bàn phím , chương trinh sẽ đợi .Lợi thế của chạy một chương trình trong background là có thể chạy các lệnh khác : không phải đợi tới khi nó kết thúc để bắt đầu một process mới 
+
+Để bắt đầu một background process , thêm dấu "&" tại cuối lệnh .
+  
+### Quản lý Job
+
+|Command|Use|
+|---|---|
+|&|Bắt đầu trực tiếp với background|
+|Ctrl -Z|Dừng tạm thời|
+|Ctrl -D|Gửi ký tự kết thúc của tệp đến công việc hiện tại để cho biết rằng nó sẽ ngừng chờ thêm đầu vào|
+|Ctrl -C|Có thể được sử dụng để hủy công việc tương tác hiện tại|
+|bg|Tiếp tục việc vừa đóng với lệnh Ctrl -Z trong nền |
+|fg|Quay trở lại foreground cái công việc cuối cùng trước khi chuyển sang background|
+|jobs|Hiển thị các công việc đang được chạy từ shell, hiển thị số công việc có thể sử dụng làm đối số cho các lệnh bg và fg|
+
+  - Hệ thống linux có một số các tiến trình đặc biệt gọi là các daemon process:
       - Thường cung cấp các chức năng quan trọng của hệ
 thống, đặc biệt là các dịch vụ mạng
       - Thường thuộc về quyền root
       - Thường không gắn với shell cụ thể nào, không truy xuất
 vào/ra bàn phím, màn hình
-      - Khi sử dụng câu lệnh liệt kê tiến trình sẽ thấy kí hiệu ở trường TTY
+      - Khi sử dụng câu lệnh liệt kê tiến trình sẽ thấy kí hiệu ? ở
+trường TTY
       - Đa số daemon process không chiếm CPU, chúng chỉ
 hoạt động khi có yêu cầu
 - Quản lý tiến trình:
@@ -61,14 +101,16 @@ Một số option:
   - u user-format
   - l long-format
   - w wide output
-  - f hiển thị PID của tiến trình cha và thời điểm bắt đầu
-
+  - f hiển thị đầy đủ các trường thông tin
   - -U user xem proc của một user cụ thể
 ```sh 
 ps
 PID  TTY    TIME       CMD
+
 739  tty1   00:00:00   bash
+
 1642 tty1   00:00:00   ps
+
 ```
 ```sh
 ps aux
@@ -113,26 +155,42 @@ Các tham số chính cho lệnh top
 
 ### Ngừng tiến trình "kill"
 `kill` sử dụng để gửi tín hiệu để dừng một process thông qua PID
-Cú pháp: kill [signal] PID
-signal phổ biến: 
+
+Cú pháp: 
+```sh
+kill [signal] PID
+```
+Signal phổ biến: 
+
 `1`: để tải lại một tiến trình
+
 `9`: kết thúc tiến trình ngay lập tức
+
 `15`: gửi tín hiệu kết thúc đến tiến trình, chờ tiến trình thực hiện cleanup và kết thúc
+
 ### Cho máy ngừng hoạt động một thời gian với lệnh sleep
 - Cú pháp: sleep [tùy-chọn] NUMBER[SUFFIXƯ] 
    - NUMBER: số giây(s) ngừng hoạt động. 
    - SUFFIX : có thể là giây(s) hoặc phút(m) hoặc giờ hoặc ngày(d)
+
 ### Xem cây quá trình với lệnh pstree
+
 Lệnh pstree sẽ hiển thị các quá trình đang chạy dưới dạng cây quá trình. Gốc của cây quá trình thường là init. Nếu đưa ra tên của một người dùng thì cây của các quá trình do người dùng đó sở hữu sẽ được đưa ra.
+
 - Cú pháp: pstree [tùy-chọn] [pid | người-dùng]
 ### Lệnh thiết đặt lại độ ưu tiên của quá trình nice và lệnh renice
+
 Để chạy một chương trình với độ ưu tiên định trước, hãy sử dụng lệnh nice. 
+
 Cú pháp lệnh: nice [tùy-chọn] [lệnh [tham-số ]... ] 
+
 Lệnh nice sẽ chạy một chương trình (lệnh) theo độ ưu tiên đã sắp xếp. Nếu không có lệnh, mức độ ưu tiên hiện tại sẽ hiển thị. Độ ưu tiên được sắp xếp từ -20 (mức ưu tiên cao nhất) đến 19 (mức ưu tiên thấp nhất). 
+ 
   -ADJUST : tăng độ ưu tiên theo ADJUST đầu tiên 
   
   --help : hiển thị trang trợ giúp và thoát 
 Để thay đổi độ ưu tiên của một quá trình đang chạy, hãy sử dụng lệnh renice. 
+
 Cú pháp lệnh: renice <độ-ưu-tiên> [tùy-chọn] Lệnh renice sẽ thay đổi mức độ ưu tiên của một hoặc nhiều quá trình đang chạy. 
   -g : thay đổi quyền ưu tiên theo nhóm người dùng 
   
@@ -196,7 +254,6 @@ chkconfig crond on
 ```
 Cấu trúc của crontab
 Một crontab file có 5 trường xác định thời gian, cuối cùng là lệnh sẽ được chạy định kỳ, cấu trúc như sau:
-```sh
 *     *     *     *     *     command to be executed
 -     -     -     -     -
 |     |     |     |     |
@@ -205,7 +262,7 @@ Một crontab file có 5 trường xác định thời gian, cuối cùng là l�
 |     |     +--------- day of month (1 - 31)
 |     +----------- hour (0 - 23)
 +------------- min (0 - 59)
-```
+
 VD: 
 Chạy script 30 phút 1 lần
 ```sh
@@ -214,4 +271,17 @@ Chạy script 30 phút 1 lần
 Chạy script vào 3 giờ sáng mỗi ngày
 ```sh
 0 3 * * * command
+```
+
+### Lệnh pgrep
+Tìm hoặc xử lý tín hiệu theo tên của tiến trình
+
+Ví dụ 1: Trả về các PID của bất kỳ tiến trình đang chạy
+```sh
+[root@test1 ~]# ps aux | grep python
+root       809  0.0  0.8 573848 16972 ?        Ssl   2018  51:44 /usr/bin/python -Es /usr/sbin/tuned -l -P
+root      4547  0.0  0.2 130152  4892 pts/0    T    21:05   0:00 python
+root      4555  0.0  0.0 112704   972 pts/0    S+   21:08   0:00 grep --color=auto python
+[root@test1 ~]# pgrep -u root python
+4547
 ```
