@@ -4,14 +4,18 @@
    - Được cung cấp đầy đủ tài nguyên cần Thiết
    - Được CPU tiếp nhận và thực hiện
 - Các trạng thaí của tiến trình
-![](image/trangthaitientring.png)
+- 
+![](image/trangthaitientrinh.png)
+
   - new: Khi chương trình vừa được load từ bộ nhớ ngoài vào trong bộ nhớ trong
   - ready: đợi đến lượt làm việc với CPU
   - running: các tiến trình đang được xử lý
   - terminated: khi chuong trình kết thúc 
   - waiting: khi có yêu cầu vào ra, quá khoảng thời gian cho phép hoặc chờ cấp phát thêm tài nguyên để chuyển trạng thái sẵn sàng
 - CPU chuyển giữa các tiến trình
+
 ![](image/chuyengiaotientrinh.png)
+
 - Đặc điểm tiến trình:
    - Tiến trình hướng I/O: sử dụng nhiều thời gian thực hiện vào/ra hơn việc tính toán, chiếm dụng CPU ngắn\
    - Tiến trình hướng xử lý: sử dụng nhiều thời gian tính toán hơn việc I/o
@@ -94,7 +98,7 @@ hoạt động khi có yêu cầu
       - Tính toán nhanh hơn
 ## 2. Quản lý các tiến trình
 #### Liệt kê các tiến trình:"ps"
-Lệnh : ps[option]
+Lệnh : ps [option]
 Một số option:
   - a tất cả proc của các user khác
   - x các proc không gắn với terminal (daemon)
@@ -113,10 +117,10 @@ PID  TTY    TIME       CMD
 
 ```
 ```sh
-ps aux
+ps -f
 ```
 
-Các thông số:
+Các thông tin:
 
 |Thông số |Ý nghĩa|
 |---|---|
@@ -137,10 +141,10 @@ Các thông số:
 ### Thông tin chi tiết với "top"
 `top` hiển thị một bảng realtime các tiến trình đang chạy, bên cạnh tiến trình thì cũng có thể theo dõi CPU và memory của hệ thống=> Giám sát tải hệ thống
 - Cung cấp các chỉ số quan trọng của hệ thống:
- - Thời gian hiện tại, thời gian từ lần khởi động mới nhất
- - Mức độ tải CPU trung bình trong 1, 5, 15 phút gần đây
- - Mức độ chiếm dụng CPU hiện tại
- - Các chỉ số quan trọng của từng tiến trình
+  - Thời gian hiện tại, thời gian từ lần khởi động mới nhất
+  - Mức độ tải CPU trung bình trong 1, 5, 15 phút gần đây
+  - Mức độ chiếm dụng CPU hiện tại
+  - Các chỉ số quan trọng của từng tiến trình
 
 ![](image/top.png)
 
@@ -169,7 +173,10 @@ Signal phổ biến:
 `15`: gửi tín hiệu kết thúc đến tiến trình, chờ tiến trình thực hiện cleanup và kết thúc
 
 ### Cho máy ngừng hoạt động một thời gian với lệnh sleep
-- Cú pháp: sleep [tùy-chọn] NUMBER[SUFFIXƯ] 
+- Cú pháp: 
+```sh
+sleep [tùy-chọn] NUMBER[SUFFIX] 
+```
    - NUMBER: số giây(s) ngừng hoạt động. 
    - SUFFIX : có thể là giây(s) hoặc phút(m) hoặc giờ hoặc ngày(d)
 
@@ -177,12 +184,20 @@ Signal phổ biến:
 
 Lệnh pstree sẽ hiển thị các quá trình đang chạy dưới dạng cây quá trình. Gốc của cây quá trình thường là init. Nếu đưa ra tên của một người dùng thì cây của các quá trình do người dùng đó sở hữu sẽ được đưa ra.
 
-- Cú pháp: pstree [tùy-chọn] [pid | người-dùng]
+- Cú pháp:
+```sh
+ pstree [tùy-chọn] [pid | người-dùng]
+```
 ### Lệnh thiết đặt lại độ ưu tiên của quá trình nice và lệnh renice
+
+Theo mặc định, tất cả các quy trình thông thường đều bằng nhau và được bắt đầu với cùng mức độ ưu tiên
 
 Để chạy một chương trình với độ ưu tiên định trước, hãy sử dụng lệnh nice. 
 
-Cú pháp lệnh: nice [tùy-chọn] [lệnh [tham-số ]... ] 
+Cú pháp lệnh: 
+```sh
+nice [tùy-chọn] [lệnh [tham-số ]... ] 
+```
 
 Lệnh nice sẽ chạy một chương trình (lệnh) theo độ ưu tiên đã sắp xếp. Nếu không có lệnh, mức độ ưu tiên hiện tại sẽ hiển thị. Độ ưu tiên được sắp xếp từ -20 (mức ưu tiên cao nhất) đến 19 (mức ưu tiên thấp nhất). 
  
