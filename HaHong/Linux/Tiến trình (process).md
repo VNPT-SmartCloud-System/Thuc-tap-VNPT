@@ -269,6 +269,7 @@ chkconfig crond on
 ```
 Cấu trúc của crontab
 Một crontab file có 5 trường xác định thời gian, cuối cùng là lệnh sẽ được chạy định kỳ, cấu trúc như sau:
+```sh
 *     *     *     *     *     command to be executed
 -     -     -     -     -
 |     |     |     |     |
@@ -277,7 +278,7 @@ Một crontab file có 5 trường xác định thời gian, cuối cùng là l�
 |     |     +--------- day of month (1 - 31)
 |     +----------- hour (0 - 23)
 +------------- min (0 - 59)
-
+```
 VD: 
 Chạy script 30 phút 1 lần
 ```sh
