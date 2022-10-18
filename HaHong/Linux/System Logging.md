@@ -5,19 +5,17 @@ Công dụng của log:
 - Phân tích nguyên nhân và khắc phục nhanh hơn khi có sử cố xảy ra
 - Phát hiện và dự đoán vấn đề có thể xáy ra đối với hệ thống
 
-System Log hay được gọi là nhật ký hệ thống (syslog) chứa một bản ghi của hệ điều hành để thấy các quá trình hệ thống và điều khiển được nạp như thế nào. các chương trình syslog cung cấp thông tin, báo lỗi và cảnh báo các sự kiện liên quan đến các hệ điều hành máy tính. những cái thông tin có thể được viết dưới các đích đến khác nhau, và nó có nhiều giải pháp để tìm thông tin thích hợp trong nhật ký hệ thống. Không dưới 3 phương pháp khác nhau có thể được sử dụng bởi các dịch vụ để ghi nhật ký hệ thống:
-Syslogd là 
+System Log hay được gọi là nhật ký hệ thống (syslog) chứa một bản ghi của hệ điều hành để thấy các tiến trình hệ thống và điều khiển được nạp như thế nào. Các chương trình syslog cung cấp thông tin, báo lỗi và cảnh báo các sự kiện liên quan đến các hệ điều hành máy tính. Những cái thông tin có thể được viết dưới các đích đến khác nhau, và nó có nhiều giải pháp để tìm thông tin thích hợp trong nhật ký hệ thống. Không dưới 3 phương pháp khác nhau có thể được sử dụng bởi các dịch vụ để ghi nhật ký hệ thống Syslogd là :
 - Ghi trực tiếp: Một vài dịch vụ viết thông tin nhật ký trực tiếp vào log files- tậm chí vài dịch vụ quan trọng như Apache web server and
 the Samba file server.
 - rsyslogd: là sự nâng cao của syslogd, một dịch vụ chăm sóc quản lý các tệp nhật ký tập trung
 - journald: Dịch vụ được tích hợp chặt chẽ với Systemd,cho phép quản trị viên đọc thông tin chi tiết từ journal trong khi giám sát trạng thái dịch vụ bằng systemctl status 
 
 - `journald`: được thực hiện bởi systemd-journald daemon cung cấp một hệ thống quản lý nhật ký nâng cao, journald sưu tập các tin nhắn từ kernel, toàn bộ phương thức khởi động, dịch vụ và ghi các tin nhắn này và một nhật ký sự kiện. Nhật ký sự kiện này được lưu trữ dưới dạng nhị phân và nó có thể được truy vấn bằng cách sử dụng `journalctl command` . Câu lệnh này cho phép bạn truy cập sâu với mức độ chi tiết về các tin nhắn được ghi lại, vì nó là một phần tích hợp của Systemd và nhận toàn bộ thông báo rằng đã được tạo bởi đơn vị Systemd.
-- Bởi vì cái nhật ký được viết bởi journald không tồn tại giữa các lần khởi động lại, các thông báo cũng được chuyển tiếp đến dịch vụ rsyslogd, ghi các thông báo đến các file khác trong thư mục /var/log directory, rsyslogd cũng cung cấp các tính năng không tồn tại trong journald
+- Bởi vì nhật ký được viết bởi journald không tồn tại giữa các lần khởi động lại, các thông báo cũng được chuyển tiếp đến dịch vụ rsyslogd, ghi các thông báo đến các file khác trong thư mục /var/log , rsyslogd cũng cung cấp các tính năng không tồn tại trong journald
   
-VD như ghi nhật ký tập trung và lọc tin nhắn bằng cách sử dụng modules. Nhiều modules có sẵn để tăng cường ghi nhật ký rsyslog, chẳng hạn như các modules đầu ra cho phép quản trị viên lưu trữ tin nhắn trong cơ sở dữ liệu.
 
-Chú ý: journal được tích hợp chặt chẽ với Systemd, nên nó ghi lại mọi thứ mà máy chủ của bạn đang làm. rsyslogd thêm một số dịch vụ cho nó. Cụ thể, nó quan tâm đến việc viết thông tin nhật kí vào trong file cụ thể sẽ liên tục giữa các lần khởi động lại, và nó cho phép bạn định cấu hình các máy chủ ghi nhật ký từ xa.
+Chú ý: journal được tích hợp chặt chẽ với Systemd, nên nó ghi lại mọi thứ mà máy chủ của bạn đang làm. rsyslogd thêm một số dịch vụ cho nó. Cụ thể, nó quan tâm đến việc viết thông tin nhật kí vào trong file cụ thể sẽ liên tục giữa các lần khởi động lại, và nó cho phép bạn cấu hình các máy chủ ghi nhật ký từ xa.
 
 - Ngoài rsyslogd và systemd-jourald, có dịch vụ auditd, dịch vụ này cung cấp kiểm tra, một dấu vết chuyên sâu về những dịch vụ, tiến trình hoặc người dùng cụ thể đã làm
 
