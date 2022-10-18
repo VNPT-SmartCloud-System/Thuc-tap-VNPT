@@ -1,5 +1,6 @@
 ### System Logging
 Log : Ghi lại liên tục các thông báo về hoạt động của cả hệ thống hoặc của các dịch vụ được triển khai trên hệ thống và file tương tự
+
 Công dụng của log:
 - Phân tích nguyên nhân và khắc phục nhanh hơn khi có sử cố xảy ra
 - Phát hiện và dự đoán vấn đề có thể xáy ra đối với hệ thống
