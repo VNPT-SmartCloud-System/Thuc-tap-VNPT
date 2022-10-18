@@ -49,6 +49,8 @@ yum list
 ```sh
 yum list installed
 ```
+
+
 - Cập nhật gói 
    - Trong kho lưu trữ luôn chứa phiên bản hiện tại, khi sử dụng lệnh yum update, các phiên bản của các gói được cài đặt được so sánh với phiên bản của các gói này trong kho lưu trữ.
 ```sh
