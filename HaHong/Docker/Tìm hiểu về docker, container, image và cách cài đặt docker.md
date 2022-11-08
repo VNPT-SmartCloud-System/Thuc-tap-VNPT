@@ -238,7 +238,7 @@ Dockerfile là một file dạng text, chứa các thông tin về môi trườn
 - Docker Engine là phần mềm cốt lõi chạy và quản lý các container. Docker engine là modul thiết kế và xây dựng từ nhiều công cụ đặc biệt nhỏ, dựa theo các tiêu chuẩn mở như OCI( Open Container Initiative)
 - Docker Engine được làm từ nhiều công cụ chuyên dụng phối hợp với nhau để tạo và chạy ác container như API, runtimes....
 
-![](image/runtime.png)
+![](image1/runtime.png)
 
 RUNC giao tiếp với HĐH và các container start và stop. Mỗi container đang chạy trên Docker đều có một phiên bản RUNC quản lý nó.
 
@@ -246,7 +246,7 @@ Containerd quản lý toàn bộ vòng đời của một container, bao gồm k
 
 Chu kì sống của container:
 
-![](image/chuki.png)
+![](image1/chuki.png)
 ### Deep dive
 - Docker daemon: chứa tất cả code cho Docker client, Docker API, image builds,... và quản lý các network, volume, image, container
 - LXC cung cấp cho daemon quyền truy cập vào các khối xây dựng cơ bản của các container tồn tại Linux kernel như namespaces and control group(cgroups)
