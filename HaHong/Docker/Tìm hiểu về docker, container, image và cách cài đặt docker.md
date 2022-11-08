@@ -1,12 +1,9 @@
 ## Chap 1. 
 ### 1. Tìm hiểu chung 
 #### VMware
-Trước đây, chúng ta chỉ chạy một ứng dụng trên mộ server, Windows và Linux không có công nghệ để chạy nhiều ứng dụng một cách an toàn trên cùng máy chủ. 
-   - Điều đó dẫn đến mỗi khi cần 1 ứng dụng mới cần phải mua một server mới. Cũng không ai biết yêu cầu của ứng dụng mới đó nên họ đoán khi chọn kiểu và size server để mua -
-   - Nếu họ mua máy chủ nhanh và lớn rất nhiều tiền(sợ mua thiếu ) dẫn đến các máy chủ được cấp nguồn dư thừa tới 5-10% khả năng cần=> lãng phí tài nguyên
-  
+
 ![](image1/Vm.png)
-- Sau đó là sự xuất hiện của VMware, đã cho phép chúng ta chạy nhiều ứng dụng trên 1 server một cách an toàn. Nó có thể chạy các ứng dụng mới trên các máy chủ hiện có với dung lượng dự phòng=> Tiệt kiệm 
+- Sự xuất hiện của VMware, đã cho phép chúng ta chạy nhiều ứng dụng trên 1 server một cách an toàn. Nó có thể chạy các ứng dụng mới trên các máy chủ hiện có với dung lượng dự phòng=> Tiệt kiệm 
 - Tuy nhiên thì VMs không hoàn hảo, mỗi OS đều tiêu thụ CPU, RAM và tài nguyên khác điều đó có thể sử dụng để sử dụng nhiều ứng dụng hơn. Chưa hết,vài trường hợp ,mỗi OS yêu cầu 1 license . VM khởi động chậm và tính di động không lớn(di chuyển giữa các trình ảo hóa và nền tảng đám mây khó hơn mức cần thiết)
 ### Containers
 Một chương trình chạy hoàn hảo trên một máy, nhưng khi chuyển sang máy khác thì lại trở nên hỗn loạn?
